@@ -17,7 +17,6 @@
 
 ### Post doc
 * 稲吉健 (Ken INAYOSHI) [特定助教/Program-Specific Assistant Professor]
-* 道下佳寛 (Yoshihiro MICHISHITA) [特定助教/Program-Specific Assistant Professor]
 
 ### Doctor course
 * 石田洋音 (Hirone ISHIDA)
@@ -49,3 +48,4 @@
 * 坂上滉太朗 (Koutaro SAKAUE) (M)
 * 櫻井理人 (Rihito SAKURAI) (D) (→東大・藤堂研)
 * 柿澤文哉 (Fumiya KAKIZAWA) (D)
+* 道下佳寛 (Yoshihiro MICHISHITA) (埼玉大・助教)
