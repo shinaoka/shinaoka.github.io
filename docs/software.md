@@ -4,8 +4,8 @@
 
 ## Selected
 
-* [DCore (integrated DMFT software for CORrelated Electrons)](https://github.com/issp-center-dev/DCorehttps://github.com/issp-center-dev/DCore)<br>
-Easy-to-use DMFT software with text and hdf5-based inteface
+* [DCore (integrated DMFT software for CORrelated Electrons)](https://github.com/issp-center-dev/DCore)<br>
+Easy-to-use DMFT software with text and hdf5-based interface
 * On-the-fly computation of IR basis functions
   - [Python: sparse-ir](https://github.com/SpM-lab/sparse-ir)
   - [Julia: SparseIR.jl](https://github.com/SpM-lab/SparseIR.jl)

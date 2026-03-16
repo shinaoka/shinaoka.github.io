@@ -9,9 +9,9 @@ Full list: [Japanese](https://researchmap.jp/read0152172/education?lang=ja)/
 [English](https://researchmap.jp/read0152172/education?lang=en)
 
 * April 2004 - March 2007<br>
-Master course, Department of Applied Physics, University of Tokyo (Superviser: Prof. Takeo Fujiwara)
+Master course, Department of Applied Physics, University of Tokyo (Supervisor: Prof. Takeo Fujiwara)
 * April 2006 - March 2009<br>
- Phd course, Department of Applied Physics, University of Tokyo (Superviser:  Prof. Masatoshi Imada)
+ PhD course, Department of Applied Physics, University of Tokyo (Supervisor: Prof. Masatoshi Imada)
 
 ## Employment
 
