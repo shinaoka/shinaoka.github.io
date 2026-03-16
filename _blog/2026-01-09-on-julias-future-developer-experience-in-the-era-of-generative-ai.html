@@ -1,0 +1,43 @@
+---
+layout: single
+title: "On Julia's future (Developer Experience in the Era of Generative AI)"
+date: 2026-01-09
+lang: en
+excerpt: "We actively use two languages with very different characteristics, Julia and Rust, for scientific computing. Precisely because this is an unusual position, we decided to write down what we have felt."
+original_url: "https://zenn.dev/h_shinaoka/articles/f8395a2c4f54d0"
+original_service: zenn
+permalink: /blog/on-julias-future-developer-experience-in-the-era-of-generative-ai/
+---
+
+{% raw %}
+<p data-line="2" class="code-line"><strong>Hiroshi Shinaoka &amp; Satoshi Terasaki</strong></p>
+<ul data-line="4" class="code-line">
+<li data-line="4" class="code-line"><a href="https://zenn.dev/h_shinaoka/articles/a099b814166ac7" target="_blank">Why we moved from C++ to Rust (Developer experience in the era of generative AI)</a></li>
+<li data-line="5" class="code-line"><a href="https://zenn.dev/terasakisatoshi/articles/c95c710c526d88" target="_blank">Goodbye <code>libsparseir</code>, hello <code>sparse-ir-rs</code></a></li>
+<li data-line="6" class="code-line"><a href="https://zenn.dev/terasakisatoshi/articles/2f82b4df67937c" target="_blank">Introducing RustToolChain.jl: a small utility for integrating Julia and Rust</a></li>
+<li data-line="7" class="code-line"><a href="https://github.com/shinaoka/tensor4all-rs" target="_blank" rel="nofollow noopener noreferrer">An experimental Rust port of tensor4all tensor network ecosystem with Julia/Python bindings via C-API</a></li>
+</ul>
+<p data-line="9" class="code-line">We actively use two languages with very different characteristics, Julia and Rust, for scientific computing. Precisely because this is an unusual position, we decided to write down what we have felt.</p>
+<h2 id="assumptions" data-line="11" class="code-line">
+<a class="header-anchor-link" href="#assumptions" aria-hidden="true"></a> Assumptions</h2>
+<p data-line="13" class="code-line">Dynamic languages such as Julia and Python are convenient to use interactively (REPL, Jupyter Notebook). It is easy to keep results in memory, perform further analysis depending on those results, and visualize them. Among these, Julia stands out by also sharing properties of statically typed languages: it is easier to write type-safe code and achieve high performance.</p>
+<p data-line="15" class="code-line">In summary, Julia's strengths are:</p>
+<ul data-line="17" class="code-line">
+<li data-line="17" class="code-line">Ease of use in interactive environments</li>
+<li data-line="18" class="code-line">Type safety by also sharing properties of statically typed languages</li>
+<li data-line="19" class="code-line">High performance, enabling pure-Julia implementations from low level to high level (addressing the two-language problem)</li>
+<li data-line="20" class="code-line">Dependency resolution via an excellent package system</li>
+</ul>
+<p data-line="22" class="code-line">On the other hand, Rust prioritizes memory safety and introduces an ownership system. The ownership system is an approach at the opposite end from garbage-collected memory management as in Julia and Python. In Julia and Python, it is easy to accidentally keep multiple mutable references to the same object, causing subtle bugs where memory contents change without noticing.</p>
+<p data-line="24" class="code-line">In contrast, Rust's ownership system can guarantee memory safety at compile time. Having an excellent package system is common to both Rust and Julia, making it easier to build ecosystems collaboratively (we avoid the dangerous topic of which one is better). The trade-off is increased complexity in writing code, and a steep learning curve for humans.</p>
+<h2 id="how-we-use-julia-and-rust" data-line="26" class="code-line">
+<a class="header-anchor-link" href="#how-we-use-julia-and-rust" aria-hidden="true"></a> How we use Julia and Rust</h2>
+<p data-line="28" class="code-line">As we wrote in earlier articles, this combination provides a good development experience and makes it easier to grow ecosystems collaboratively. Because both have excellent package systems, it is easy to build Julia libraries with Rust backends.</p>
+<p data-line="30" class="code-line">In principle, Julia can cover the entire stack from low level to high level in a single language, but the cost of optimizing a huge codebase is not small. Even with static analysis tools such as <code>JET.jl</code>, as long as dynamic coding styles are possible, there is a limit to what can be guaranteed statically. Moreover, for high-performance parallel execution, thread startup costs and garbage collection overhead cannot be ignored. Whether one should pay the cost of carefully writing highly optimized large code depends on the size of the codebase.</p>
+<p data-line="32" class="code-line">Meanwhile, a strength of Julia is that a huge codebase can be split into multiple components and published as independent Julia packages. However, Julia's package registration system is issue-based on GitHub, and new packages or new versions are not published immediately. Managing versions across many mutually dependent libraries is extremely painful.</p>
+<p data-line="34" class="code-line">From personal experience, when writing large backend code, as long as support from AI agents is available, writing in Rust feels comfortable. Rust code can look very complex due to ownership annotations, and one might think it is hard for humans to review code generated by AI agents. In practice, however, the compiler validates ownership constraints, so humans can focus on higher-level checks (correctness of algorithms and data structures). Also, multiple packages (crates) can be grouped in a single repository and managed under a shared version (the workspace feature). Publishing crates can also be done immediately from the terminal using <code>cargo publish</code>, effectively enabling a set of crates to be released together.</p>
+<p data-line="36" class="code-line">Historically, combining languages often leads to the "two-language problem." For example, combining C++ and Python is something we would never want to do again ourselves: distributing libraries, managing dependencies, and managing versions become difficult in countless ways (<a href="https://zenn.dev/terasakisatoshi/articles/c95c710c526d88" target="_blank">Goodbye <code>libsparseir</code>, hello <code>sparse-ir-rs</code></a>). Rust and Julia can interoperate easily through C-FFI, and both can leverage excellent package systems, so these problems are less severe than before.</p>
+<p data-line="38" class="code-line">Even so, distributing libraries that combine Julia and Rust still requires specialized knowledge. The <code>RustToolChain.jl</code> introduced above is a tool to address this. With the help of generative AI, this area will further improve.</p>
+<p data-line="40" class="code-line">The boundary between Julia and Rust shifts: the more generative AI advances, the more territory becomes favorable to Rust. Once an era arrives where natural language can handle everything end-to-end, from data analysis to visualization (it is near), humans do not care what tools the AI uses behind the scenes. At that point, the role of dynamic programming languages as a bridge between humans and machines will be replaced by natural language.</p>
+
+{% endraw %}

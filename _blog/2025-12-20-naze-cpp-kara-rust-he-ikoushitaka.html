@@ -1,0 +1,75 @@
+---
+layout: single
+title: "なぜC++からRustへ移行したか (生成AI時代の開発体験)"
+date: 2025-12-20
+lang: ja
+excerpt: "前回の記事 C++を使った数値計算ライブラリの整備で辛かったこと の続編である. C++で開発していた libsparseir を Rust へ移行した. その経験を基に, なぜC++からRustへ移行したかを述べる."
+original_url: "https://zenn.dev/h_shinaoka/articles/203fb232cc3f61"
+original_service: zenn
+permalink: /blog/naze-cpp-kara-rust-he-ikoushitaka/
+---
+
+{% raw %}
+<h2 id="%E3%81%BE%E3%81%A8%E3%82%81" data-line="2" class="code-line">
+<a class="header-anchor-link" href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-hidden="true"></a> まとめ</h2>
+<ul data-line="3" class="code-line">
+<li data-line="3" class="code-line">C++は統合されたパッケージシステムが弱く, 依存関係の管理と成果の再利用が難しい.</li>
+<li data-line="4" class="code-line">Rustは<code>cargo</code>を中心に成果をcrateとして分割・共有しやすく, エコシステムを協力して育てやすい.</li>
+<li data-line="5" class="code-line">Python/Julia/Fortranから呼び出す用途では, RustはC-API経由で連携しやすく, バックエンドをメモリ安全に保ちやすい.</li>
+<li data-line="6" class="code-line">生成AI支援を前提にすると, Rustの学習コストや設計変更時の修正負担を下げられる.</li>
+<li data-line="7" class="code-line">Rustは堅牢な基盤実装, Juliaは試行錯誤に向き, C-FFIを介して組み合わせるとよい.</li>
+</ul>
+<h2 id="%E3%81%BE%E3%81%88%E3%81%8C%E3%81%8D" data-line="9" class="code-line">
+<a class="header-anchor-link" href="#%E3%81%BE%E3%81%88%E3%81%8C%E3%81%8D" aria-hidden="true"></a> まえがき</h2>
+<p data-line="10" class="code-line">前回の記事 <a href="https://zenn.dev/articles/896539019fdd08/" target="_blank">C++を使った数値計算ライブラリの整備で辛かったこと</a> の続編である. C++で開発していた <a href="https://github.com/SpM-lab/libsparseir" target="_blank" rel="nofollow noopener noreferrer">libsparseir</a> を<a href="https://github.com/SpM-lab/sparse-ir-rs" target="_blank" rel="nofollow noopener noreferrer">Rust</a>へ移行した. その経験を基に, なぜC++からRustへ移行したかを述べる.</p>
+<h2 id="%E8%83%8C%E6%99%AF" data-line="12" class="code-line">
+<a class="header-anchor-link" href="#%E8%83%8C%E6%99%AF" aria-hidden="true"></a> 背景</h2>
+<p data-line="13" class="code-line">libsparseirはPython, Juliaで書かれた前身のライブラリ (sparse-ir, SparseIR.jl) をC++で実装したものである. C++はABI互換性がないため, 他の言語からの利用は困難である. そこでC-FFIのみを公開し, 他言語からの利用を可能にした. これによりsparse-irやSparseIR.jlのバックエンドを統一し, メンテナンスコストを削減することを狙った.</p>
+<p data-line="15" class="code-line">しかし前回記事に書いたような理由で, 標準的なパッケージマネージャー, コンパイラー, ビルドシステムの不在が辛い状況であった.</p>
+<p data-line="17" class="code-line">ちょうど他のプロジェクトでRustに触れる機会がありそうだったので, 練習として <a href="https://github.com/SpM-lab/sparse-ir-rs" target="_blank" rel="nofollow noopener noreferrer">libsparseirのRust版</a> をCursorで実装した. 単なる練習のつもりだったが, 想定以上に開発体験が良かったため, libsparseirを廃止しRust版へ完全移行した. 出来上がったコードはテストやコード例を含めて4万行近いが, 私の自然言語による指示の下で, ほぼ2ヶ月で大部分をAIが生成している.</p>
+<p data-line="19" class="code-line">libsparseirに特有の話, RustとC連携などの技術的な話は別記事に譲り, 本記事ではRustによる開発体験の観点から移行理由を整理する.</p>
+<h2 id="%E5%89%8D%E5%9B%9E%E8%A8%98%E4%BA%8B%E3%81%AE%E8%A6%81%E7%82%B9%EF%BC%88%E6%8A%9C%E7%B2%8B%EF%BC%89" data-line="21" class="code-line">
+<a class="header-anchor-link" href="#%E5%89%8D%E5%9B%9E%E8%A8%98%E4%BA%8B%E3%81%AE%E8%A6%81%E7%82%B9%EF%BC%88%E6%8A%9C%E7%B2%8B%EF%BC%89" aria-hidden="true"></a> 前回記事の要点（抜粋）</h2>
+<p data-line="22" class="code-line">以下は前回記事の要点を抜粋し, 本記事向けに再構成したものである.</p>
+<p data-line="24" class="code-line">前回記事の主張は, 次の1行に集約される.</p>
+<blockquote data-line="26" class="code-line">
+<p data-line="26" class="code-line">特に, 標準的なパッケージマネージャー, コンパイラー, ビルドシステムの不在が辛い.</p>
+</blockquote>
+<p data-line="28" class="code-line">具体例として, 次が挙げられる.</p>
+<ul data-line="30" class="code-line">
+<li data-line="30" class="code-line">
+<strong>パッケージ管理</strong>: ライブラリ分割と再利用, 配布時の依存関係管理が難しい.</li>
+<li data-line="31" class="code-line">
+<strong>ビルドとABI</strong>: ビルド設定の分断, コンパイラ差分, ABI非互換が配布を難しくする.</li>
+<li data-line="32" class="code-line">
+<strong>メモリ安全性</strong>: 危険な挙動を容易に書けてしまい, 機械的に潰しにくい.</li>
+<li data-line="33" class="code-line">
+<strong>行列・配列とドキュメント</strong>: 事実上の標準やドキュメント生成の標準が弱く, 運用コストが増える.</li>
+</ul>
+<h2 id="rust%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%97%E3%81%9F%E7%90%86%E7%94%B1%EF%BC%88%E9%96%8B%E7%99%BA%E4%BD%93%E9%A8%93%EF%BC%89" data-line="35" class="code-line">
+<a class="header-anchor-link" href="#rust%E3%81%B8%E7%A7%BB%E8%A1%8C%E3%81%97%E3%81%9F%E7%90%86%E7%94%B1%EF%BC%88%E9%96%8B%E7%99%BA%E4%BD%93%E9%A8%93%EF%BC%89" aria-hidden="true"></a> Rustへ移行した理由（開発体験）</h2>
+<p data-line="36" class="code-line">パッケージシステムによる成果共有が容易になることが, Rustを使う最大のメリットだと思う. 計算強相関物理の分野ではALPS, TRIQSなどのC++プロジェクトがあるが, エコシステムが分断しやすく互いに成果を共有しづらい. 例えば, 巨大なライブラリに含まれる特定の機能を使おうとしたとき, 巨大なライブラリ全体をビルドすることになることが多い. それが依存するライブラリの入手・ビルドから始まって, 多大な労力が必要である. 因果関係は逆で, C++に統合されたパッケージシステムがないからこそ, これらのライブラリはモノリシックな構成をとらざるを得なくなっているのである. 一方, Rustでは依存関係が複雑になっても, cargoが自動的に依存関係を解決してくれるので, 手動で依存関係を管理する必要がない. その結果, 機能ごとに独立したcrateを公開することが容易になり, いろんなコミュニティから成果を再利用しやすい. 力を合わせてエコシステムを作っていきやすいところが良い.</p>
+<p data-line="38" class="code-line">また, JuliaやPython, Fortranでのラッパーライブラリを作る際, RustとはC-APIで容易に連携が可能である. ラッパーライブラリをビルドする際に, 内部でcargoを呼べば, 再現性高く共有ライブラリをビルドできるのはありがたい. C++の場合, CMakeなどを使った複雑怪奇なビルド設定が必要になる上, ネットワークアクセスが許されない環境では手動で全依存パッケージをダウンロードすることになりかねない. 一方, Rustの場合, 私はまだ試したことがないが, <code>cargo vendor</code> で依存パッケージを事前にダウンロードし, ソースコードツリー中に同梱することも可能らしい.</p>
+<p data-line="40" class="code-line">特に, FFIを通してPythonやJulia, Fortranから呼び出す場合, バックエンド側がメモリ安全であることは重要である. C++はバックエンド内部でsegmentation faultを起こしやすく, 一旦起きてしまうと解析もしづらい. Rustでは <code>unsafe</code> とFFI境界を重点的に確認すればよい.</p>
+<p data-line="42" class="code-line">Rustは学習曲線が急峻であることで有名である. 私はRustの所有権システムの概略は理解しているが, 誤りなく, 複雑な構文を書くのは難しい. というよりは, そこはAIに積極的に任せた方が良いと感じる. CursorなどのAI支援エディターを使う場合, AIが生成したコードに構文エラーが出ても即時にAIが修正できる. また, 構造体のメンバーの変更などの, 小さな設計変更に伴って, コードベース全体に大規模な修正が必要な場合, AIが自律的に修正できる. AIによるコーディングが主流になってこそ, Rustのメリットが生きてくると感じる.</p>
+<h2 id="%E8%AA%B2%E9%A1%8C" data-line="44" class="code-line">
+<a class="header-anchor-link" href="#%E8%AA%B2%E9%A1%8C" aria-hidden="true"></a> 課題</h2>
+<p data-line="45" class="code-line">一方, 課題はある.</p>
+<ul data-line="47" class="code-line">
+<li data-line="47" class="code-line">JuliaやPythonの自動微分システムとどう連携するか？</li>
+<li data-line="48" class="code-line">ScalapackなどのHPCライブラリのラッパーの整備</li>
+</ul>
+<p data-line="50" class="code-line">ただ, 生成AIの助けがあれば, これらの解決はそれほど難しくないと今は感じる. C++で新規コードを書いて, どうロバストに配布しようか, 解決できない問題に労力を使うより, 協力してRustでエコシステムを作ってしまったのが良いのではないかと感じる.</p>
+<h2 id="julia%E3%81%A8%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91" data-line="52" class="code-line">
+<a class="header-anchor-link" href="#julia%E3%81%A8%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91" aria-hidden="true"></a> Juliaとの使い分け</h2>
+<p data-line="54" class="code-line">Rustは優秀な言語だが, 計算物理をすべてRustで行うのには向いていない. Rustは堅牢な基盤ライブラリの実装に向いている. 一方, Juliaは人間が書きやすく, 様々なアイデアを素早く実装する用途に向く. 両者は全く異なる長所と設計を持っている. C-FFIを通した連携が容易であるからこそ, その組み合わせで互いの長所を活かすことができる.</p>
+<p data-line="56" class="code-line">個人的な限られた体験であるが, Rustを推進している人がJuliaを攻撃してくることを見たことがある.</p>
+<ul data-line="58" class="code-line">
+<li data-line="58" class="code-line">再現性のないノートブックを使う場合, 計算再現性を保つことが難しい.</li>
+<li data-line="59" class="code-line">Juliaは動的な言語で, 依存するライブラリの挙動をハックすることもできる. 計算の正しさを保証できない.</li>
+</ul>
+<p data-line="61" class="code-line">などである. それらは言語の性質によるものであり, 言語の選択はその用途に合わせて行うべきである.</p>
+<p data-line="63" class="code-line">一方, Juliaだけを使って, 計算物理エコシステム全体を構築することも現実的ではないと感じる. Juliaは試行錯誤に向いているが, 計算物理のような, 大規模なコードベースを書く際には困難が増えていく. 特に, 型関係の誤りを即座に検出して, AIで修正できるかは, 生成AI時代のコーディングにおいては効率を大きく左右する.</p>
+<p data-line="65" class="code-line">個人的には, Juliaを使って計算物理ライブラリを作成し, アルゴリズム等が比較的固まった段階で, 堅牢性, 再現性, 多言語からの再利用性を確保するために, 一部をRustへ移行するのが良いのではないかと感じる.</p>
+
+{% endraw %}

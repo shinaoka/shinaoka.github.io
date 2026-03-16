@@ -1,0 +1,43 @@
+---
+layout: single
+title: "Juliaの生きる道 (生成AI時代の開発体験)"
+date: 2026-01-09
+lang: ja
+excerpt: "私たちは, JuliaとRustという性質の異なる言語を科学技術計算に積極的に利用している. このような珍しい立ち位置にいるからこそ, 感じたことを記事にしてみた."
+original_url: "https://zenn.dev/h_shinaoka/articles/fcba75dc2e00a0"
+original_service: zenn
+permalink: /blog/julia-no-ikirumichi/
+---
+
+{% raw %}
+<p data-line="2" class="code-line"><strong>Hiroshi Shinaoka &amp; Satoshi Terasaki</strong></p>
+<ul data-line="4" class="code-line">
+<li data-line="4" class="code-line"><a href="https://zenn.dev/h_shinaoka/articles/203fb232cc3f61" target="_blank">なぜC++からRustへ移行したか (生成AI時代の開発体験)</a></li>
+<li data-line="5" class="code-line"><a href="https://zenn.dev/terasakisatoshi/articles/c95c710c526d88" target="_blank">お疲れ <code>libsparseir</code>, こんにちは <code>sparse-ir-rs</code></a></li>
+<li data-line="6" class="code-line"><a href="https://zenn.dev/terasakisatoshi/articles/2f82b4df67937c" target="_blank">RustToolChain.jl の紹介: Julia と Rust との連携の小道具として</a></li>
+<li data-line="7" class="code-line"><a href="https://github.com/shinaoka/tensor4all-rs" target="_blank" rel="nofollow noopener noreferrer">An experimental Rust port of tensor4all tensor network ecosystem with Julia/Python bindigs via C-API</a></li>
+</ul>
+<p data-line="9" class="code-line">私たちは, JuliaとRustという性質の異なる言語を科学技術計算に積極的に利用している. このような珍しい立ち位置にいるからこそ, 感じたことを記事にしてみた.</p>
+<h2 id="%E5%89%8D%E6%8F%90" data-line="11" class="code-line">
+<a class="header-anchor-link" href="#%E5%89%8D%E6%8F%90" aria-hidden="true"></a> 前提</h2>
+<p data-line="12" class="code-line">Juliaを含め, Pythonなどの動的型付け言語は, 対話環境 (REPLやJupyter Notebook)での利用が気軽にできるのが良い. 実行結果をメモリに保持しつつ, 結果に応じて解析を加えたり, 結果を可視化したりすることが容易である. その中でもJuliaの際立つ特徴は, 静的型付け言語の性質も併せ持ち, 型安全なコードを書きやすく, 高速な実行速度を実現していることである. まとめると, Juliaの長所は,</p>
+<ul data-line="14" class="code-line">
+<li data-line="14" class="code-line">対話環境での使いやすさ</li>
+<li data-line="15" class="code-line">静的型付け言語の性質も併せ持つ型安全性</li>
+<li data-line="16" class="code-line">高速な実行速度により, 低層から高層までpure Juliaで記述可能 (→2言語問題の解消)</li>
+<li data-line="17" class="code-line">優秀なパッケージシステムによる依存性解決</li>
+</ul>
+<p data-line="19" class="code-line">というところである.</p>
+<p data-line="21" class="code-line">一方, Rustは, メモリ安全性を重視し, 所有権システムを導入している. 所有権システムは, ガーベッジコレクションによるメモリ管理を行うJuliaやPythonとは対極的なアプローチである. JuliaやPythonでは, うっかり同じオブジェクトの可変参照を複数箇所で保持してしまい, 知らないうちにメモリの中身が変わっているというバグが発生しやすい.</p>
+<p data-line="23" class="code-line">一方, Rustの所有権システムは, コンパイル時にメモリ安全性を保証できる. 優秀なパッケージシステムがあることは, RustとJuliaの両方に共通しており, エコシステムを協力して育てやすい (どちらが優秀かという危険な話題には触れない). その代償として, コードの記述の複雑性は高く, 人間にとっての学習曲線は急峻である.</p>
+<h2 id="julia%E3%81%A8rust%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91" data-line="25" class="code-line">
+<a class="header-anchor-link" href="#julia%E3%81%A8rust%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91" aria-hidden="true"></a> JuliaとRustの使い分け</h2>
+<p data-line="27" class="code-line">以前の記事でも書いたが, これらの組み合わせは, 開発体験も良く, エコシステムも協力して育てやすい. 両方とも優秀なパッケージシステムがあるからこそ, RustをバックエンドとしたJuliaライブラリを作成しやすい.</p>
+<p data-line="29" class="code-line">Juliaは低レベルから高レベルまですべてのスタックを単一言語で原理的に書くことはできるが, 巨大なコードベースを最適化するコストは小さくない. <code>JET.jl</code>などの静的解析ツールがあるといえ, 動的な書き方ができてしまう以上, 静的に保証できる範囲には限界がある. さらに, 高性能な並列実行ではスレッド起動コストやガーベッジコレクションのオーバーヘッドも無視できない. 最適化された巨大なコードを慎重に書くコストを払うべきかは, コードベースのサイズによる.</p>
+<p data-line="31" class="code-line">巨大なコードベースを複数のコンポーネントに分割し, 独立したJuliaパッケージとして公開できるのはJuliaの強みである. しかし, Juliaのパッケージ登録システムはGitHubのissueベースであり, 新しいパッケージや新しいバージョンが即時に公開されるわけではない. 相互に依存した多数のライブラリのバージョンを管理するのはとてもつらい.</p>
+<p data-line="33" class="code-line">個人的な体験では, 大規模なバックエンドコードを書くときは, AIエージェントの支援がある限り, Rustで書くのが心地よい. Rustコードは所有権関係の記述のため, 一見非常に複雑で, AIエージェントで生成したコードを人間がレビューしづらいと思うかもしれない. しかし, 実際には, 所有権関係はコンパイラが検証してくれるので, 人間はもっと高次の動作のチェック (アルゴリズムやデータ構造の正当性)に集中できる. また, 複数のパッケージ (crate)を単一のレポジトリにまとめて, 共通したバージョンを付与して管理することができる (workspace機能). crateの公開も, <code>cargo publish</code> を使えばターミナル上で即時にできるため, 複数のcrateを実質まとめて公開することができる.</p>
+<p data-line="35" class="code-line">このように言語を組み合わせると, しばしば「2言語問題」が発生することが歴史的に知られている. 例えば, C++とPythonの組み合わせは, もう2度と自分ではやりたくないぐらい, ライブラリの配布が難しいとか, 依存関係の管理が難しいとか, バージョンの管理が難しいとか, 数え切れない問題が発生する (<a href="https://zenn.dev/terasakisatoshi/articles/c95c710c526d88" target="_blank">お疲れ <code>libsparseir</code>, こんにちは <code>sparse-ir-rs</code></a>). RustとJuliaはC-FFIを通して簡単に連携し, 互いが優秀なパッケージシステムを利用できるので, このような問題は以前ほど深刻ではない.</p>
+<p data-line="37" class="code-line">このようなJuliaとRustを組み合わせたライブラリの配布には, まだ専門的知識が必要である. 上述した<a href="https://zenn.dev/terasakisatoshi/articles/2f82b4df67937c" target="_blank"><code>RustToolChain.jl</code></a>は, このような問題を解決するためのツールである.この辺りは, 生成AIの力を借りれば, 今後さらに改善されていく.</p>
+<p data-line="39" class="code-line">JuliaとRustの境界は, 生成AIが発達すればするほど, Rustが有利な領域がひろがっていく. 自然言語で, データ解析から可視化まで一貫してできてしまう時代になったら (近いはず), 裏でAIがどんなツールを使うかは, 人間には関係ない. その時点で, 人間と機械をつなぐという動的プログラミング言語の役割を, 自然言語が置き換えることになる.</p>
+
+{% endraw %}

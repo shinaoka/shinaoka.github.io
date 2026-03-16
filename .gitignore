@@ -1,1 +1,4 @@
 .worktrees/
+.bundle/
+_site/
+vendor/bundle/

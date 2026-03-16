@@ -1,0 +1,152 @@
+---
+layout: single
+title: "Slackに疲れた研究者のためのMatrix入門"
+date: 2025-05-09
+lang: ja
+excerpt: "複数の国際共同研究や学際的なプロジェクトに関わっていると、Slackのワークスペースが次第に増え、管理が煩雑になります。 誰かにDMを送ろうとしても、まずどのワークスペースかを思い出す必要があり、通知も分断されがちです。"
+original_url: "https://zenn.dev/h_shinaoka/articles/595830fba76abe"
+original_service: zenn
+permalink: /blog/slack-ni-tsukareta-kenkyusha-no-tame-no-matrix-nyumon/
+---
+
+{% raw %}
+<h2 id="%E5%88%86%E6%95%A3%E5%9E%8B%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%81%8C%E3%82%82%E3%81%9F%E3%82%89%E3%81%99%E6%9F%94%E8%BB%9F%E3%81%A7%E6%8C%81%E7%B6%9A%E5%8F%AF%E8%83%BD%E3%81%AA%E7%A0%94%E7%A9%B6%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" data-line="1" class="code-line">
+<a class="header-anchor-link" href="#%E5%88%86%E6%95%A3%E5%9E%8B%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%81%8C%E3%82%82%E3%81%9F%E3%82%89%E3%81%99%E6%9F%94%E8%BB%9F%E3%81%A7%E6%8C%81%E7%B6%9A%E5%8F%AF%E8%83%BD%E3%81%AA%E7%A0%94%E7%A9%B6%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" aria-hidden="true"></a> 分散型チャットプロトコルがもたらす柔軟で持続可能な研究コミュニケーション</h2>
+<p data-line="3" class="code-line">複数の国際共同研究や学際的なプロジェクトに関わっていると、Slackのワークスペースが次第に増え、管理が煩雑になります。<br>
+誰かにDMを送ろうとしても、まずどのワークスペースかを思い出す必要があり、通知も分断されがちです。</p>
+<p data-line="6" class="code-line">こうした問題に対して、私は最近 <strong>Matrix + Element</strong> に移行しました。分散型プロトコルであるMatrixは、研究者のコラボレーションに非常に相性が良いと感じています。本記事ではその特徴と活用方法を紹介します。</p>
+<p data-line="8" class="code-line">ただ、多言語環境でのメッセージ検索に問題があるので、英語環境でご使用ください (下のトラブルシューティングの参照）。</p>
+<hr data-line="10" class="code-line">
+<h2 id="%E5%A7%8B%E3%82%81%E3%82%8B%E3%81%AB%E3%81%AF%EF%BC%9F" data-line="11" class="code-line">
+<a class="header-anchor-link" href="#%E5%A7%8B%E3%82%81%E3%82%8B%E3%81%AB%E3%81%AF%EF%BC%9F" aria-hidden="true"></a> 始めるには？</h2>
+<ul data-line="13" class="code-line">
+<li data-line="13" class="code-line"><a href="https://element.io" target="_blank" rel="nofollow noopener noreferrer">https://element.io</a></li>
+<li data-line="14" class="code-line"><a href="https://element.io/download" target="_blank" rel="nofollow noopener noreferrer">https://element.io/download</a></li>
+</ul>
+<p data-line="16" class="code-line">ダウンロードページからクライアントアプリをダウンロードして起動、<code>matrix.org</code>にアカウントを作る。もしくは、ダウンロードページからElement web (Webクライアント)を起動して、アカウントを作成。登録時はWebアプリを使った方がトラブルが少ない。</p>
+<hr data-line="19" class="code-line">
+<h2 id="matrix%E3%81%A8%E3%81%AF%EF%BC%9F" data-line="21" class="code-line">
+<a class="header-anchor-link" href="#matrix%E3%81%A8%E3%81%AF%EF%BC%9F" aria-hidden="true"></a> Matrixとは？</h2>
+<p data-line="23" class="code-line">Matrixは、<strong>分散型のオープンなチャットプロトコル</strong>です。ユーザーは「ホームサーバ（homeserver）」と呼ばれる任意のサーバにアカウントを作成します。<br>
+重要なのは、<strong>どのホームサーバに所属していても、他のサーバのユーザーと透過的に通信ができる</strong>という点です。<br>
+(研究者が使うには、<code>matrix.org</code>の標準のホームサーバ (無料)でアカウントを作れば十分でしょう。)</p>
+<p data-line="27" class="code-line">たとえば、<code>@alice:uni-wien.at</code> と <code>@bob:myuniv.jp</code> のように異なる大学に所属していても、DMの送信も、同じルームへの参加も制限なく可能です。これは、Slackなどの「ワークスペースごとの分断」とは対照的です。</p>
+<hr data-line="30" class="code-line">
+<h2 id="tu-wien%E3%81%A7%E3%81%AE%E5%B0%8E%E5%85%A5%E4%BA%8B%E4%BE%8B" data-line="32" class="code-line">
+<a class="header-anchor-link" href="#tu-wien%E3%81%A7%E3%81%AE%E5%B0%8E%E5%85%A5%E4%BA%8B%E4%BE%8B" aria-hidden="true"></a> TU Wienでの導入事例</h2>
+<p data-line="34" class="code-line">ウィーン工科大学（TU Wien）では、Matrixを公式チャット基盤（TUmatrix）として採用しています。<br>
+学内のIT部門がホームサーバを提供し、研究者は大学アカウントでそのまま利用できます。</p>
+<blockquote data-line="37" class="code-line">
+<p data-line="37" class="code-line">🔗 <a href="https://www.it.tuwien.ac.at/en/services/communication-and-collaboration/tumatrix" target="_blank" rel="nofollow noopener noreferrer">TUmatrix公式ページ</a></p>
+</blockquote>
+<p data-line="39" class="code-line">Matrixはこのように、<strong>学術機関による公式導入にも耐えるインフラ</strong>となっています。</p>
+<hr data-line="41" class="code-line">
+<h2 id="%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E6%A9%9F%E8%83%BD%E3%81%AB%E3%82%88%E3%82%8B%E3%83%AB%E3%83%BC%E3%83%A0%E3%81%AE%E6%95%B4%E7%90%86" data-line="43" class="code-line">
+<a class="header-anchor-link" href="#%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E6%A9%9F%E8%83%BD%E3%81%AB%E3%82%88%E3%82%8B%E3%83%AB%E3%83%BC%E3%83%A0%E3%81%AE%E6%95%B4%E7%90%86" aria-hidden="true"></a> スペース機能によるルームの整理</h2>
+<p data-line="45" class="code-line">Matrixには「スペース（Spaces）」という機能があり、Slackのワークスペースのようにルームを整理できます。<br>
+たとえば以下のような構成が可能です：</p>
+<ul data-line="48" class="code-line">
+<li data-line="48" class="code-line">
+<p data-line="48" class="code-line"><strong>研究室スペース</strong></p>
+<ul data-line="49" class="code-line">
+<li data-line="49" class="code-line">セミナー通知</li>
+<li data-line="50" class="code-line">論文読み会</li>
+<li data-line="51" class="code-line">雑談ルーム</li>
+</ul>
+</li>
+<li data-line="53" class="code-line">
+<p data-line="53" class="code-line"><strong>国際共同研究スペース</strong></p>
+<ul data-line="54" class="code-line">
+<li data-line="54" class="code-line">理論班</li>
+<li data-line="55" class="code-line">実験班</li>
+<li data-line="56" class="code-line">全体会議</li>
+</ul>
+</li>
+</ul>
+<p data-line="58" class="code-line">階層的に整理できるため、複数の研究プロジェクトを並行して進める際にも非常に見通しが良くなります。</p>
+<hr data-line="60" class="code-line">
+<h2 id="%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%81%AE%E9%81%B8%E6%8A%9E" data-line="62" class="code-line">
+<a class="header-anchor-link" href="#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%81%AE%E9%81%B8%E6%8A%9E" aria-hidden="true"></a> クライアントの選択</h2>
+<p data-line="64" class="code-line">公式クライアントとしては、以下の2つが推奨されます：</p>
+<ul data-line="66" class="code-line">
+<li data-line="66" class="code-line">
+<p data-line="66" class="code-line"><strong>PC / Web</strong>: <a href="https://element.io" target="_blank" rel="nofollow noopener noreferrer">Element</a><br>
+→ 安定しており、すべての機能に対応。研究用に最適。</p>
+</li>
+<li data-line="69" class="code-line">
+<p data-line="69" class="code-line"><strong>スマートフォン</strong>: Element X<br>
+→ 次世代クライアントとして設計されており、非常に高速かつ軽量。暗号化にも対応。ただし現時点ではスペース機能が完全対応しておらず、すべてのルームがフラットに表示される点は留意が必要です。</p>
+</li>
+</ul>
+<p data-line="72" class="code-line">なお、旧版の「Element Messenger」は同期が遅いため、現在は非推奨です。</p>
+<hr data-line="74" class="code-line">
+<h2 id="%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E5%B1%A5%E6%AD%B4%E3%81%8C%E5%89%8A%E9%99%A4%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84" data-line="76" class="code-line">
+<a class="header-anchor-link" href="#%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E5%B1%A5%E6%AD%B4%E3%81%8C%E5%89%8A%E9%99%A4%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84" aria-hidden="true"></a> チャット履歴が削除されない</h2>
+<p data-line="78" class="code-line">Matrixでは、<strong>チャット履歴は基本的に削除されません</strong>。自分がルームに残っている限り、過去のメッセージはすべて検索可能です。</p>
+<p data-line="80" class="code-line">これは、研究において以下の点で重要です：</p>
+<ul data-line="82" class="code-line">
+<li data-line="82" class="code-line">長期的な議論の記録</li>
+<li data-line="83" class="code-line">セミナーのログや議事録の蓄積</li>
+<li data-line="84" class="code-line">初期のアイデアやレビューコメントの保存</li>
+</ul>
+<hr data-line="87" class="code-line">
+<h2 id="%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%85%B1%E6%9C%89%E3%81%A8%E4%BF%9D%E5%AD%98%E5%85%88" data-line="89" class="code-line">
+<a class="header-anchor-link" href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%85%B1%E6%9C%89%E3%81%A8%E4%BF%9D%E5%AD%98%E5%85%88" aria-hidden="true"></a> ファイル共有と保存先</h2>
+<p data-line="91" class="code-line">アップロードされたファイルは、そのユーザーの所属するホームサーバに保存されます。<br>
+たとえば、<code>@you:matrix.org</code> のユーザーがファイルを共有すると、それは <code>matrix.org</code> 上に保存されます。</p>
+<p data-line="94" class="code-line">matrix.org は無料で使える優れた公共サーバですが、大容量ファイルの長期保存はマナーとして避けた方がいいでしょう。Element One などの有料プランを使って、エコシステムに貢献するのもいいかもしれません。</p>
+<hr data-line="96" class="code-line">
+<h2 id="%E8%87%AA%E5%88%86%E3%81%AE%E3%83%9B%E3%83%BC%E3%83%A0%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E5%BB%BA%E3%81%A6%E3%82%8B%EF%BC%8F%E5%80%9F%E3%82%8A%E3%82%8B" data-line="98" class="code-line">
+<a class="header-anchor-link" href="#%E8%87%AA%E5%88%86%E3%81%AE%E3%83%9B%E3%83%BC%E3%83%A0%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E5%BB%BA%E3%81%A6%E3%82%8B%EF%BC%8F%E5%80%9F%E3%82%8A%E3%82%8B" aria-hidden="true"></a> 自分のホームサーバを建てる／借りる</h2>
+<p data-line="100" class="code-line">研究用途であれば、matrix.org をそのまま使うだけでも問題なく運用できます。<br>
+ただし、以下のようなニーズがある場合は、ホームサーバの構築や商用ホスティングも検討できます：</p>
+<ul data-line="103" class="code-line">
+<li data-line="103" class="code-line">プロジェクト単位の管理を行いたい</li>
+<li data-line="104" class="code-line">大容量のファイルを管理したい</li>
+<li data-line="105" class="code-line">データ保持ポリシーに独自の要件がある場合</li>
+</ul>
+<p data-line="107" class="code-line">Synapse（Matrixの公式サーバ実装）を使えば自前の構築は比較的容易ですし、modular.im などのホスティングサービスを使えば簡単に利用を始められます。</p>
+<p data-line="109" class="code-line">なお、<strong>自分のホームサーバを使っていても、他のサーバのユーザーと何の違和感もなく通信できる</strong>のがMatrixの大きな利点です。</p>
+<hr data-line="111" class="code-line">
+<h2 id="%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%EF%BC%9Ae2ee%E3%81%AB%E5%AF%BE%E5%BF%9C" data-line="113" class="code-line">
+<a class="header-anchor-link" href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%EF%BC%9Ae2ee%E3%81%AB%E5%AF%BE%E5%BF%9C" aria-hidden="true"></a> セキュリティ：E2EEに対応</h2>
+<p data-line="115" class="code-line">Matrixは**エンドツーエンド暗号化（E2EE）**に対応しており、プライベートなルームではデフォルトで暗号化が有効になります。<br>
+メッセージや添付ファイルの内容はホームサーバを経由しても読み取れません。複雑な設定は不要で、Elementが自動的に暗号化を処理してくれます。</p>
+<hr data-line="118" class="code-line">
+<h2 id="%E4%B8%AD%E5%9B%BD%E6%9C%AC%E5%9C%9F%E3%81%8B%E3%82%89%E3%81%AE%E5%88%A9%E7%94%A8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" data-line="120" class="code-line">
+<a class="header-anchor-link" href="#%E4%B8%AD%E5%9B%BD%E6%9C%AC%E5%9C%9F%E3%81%8B%E3%82%89%E3%81%AE%E5%88%A9%E7%94%A8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" aria-hidden="true"></a> 中国本土からの利用について</h2>
+<p data-line="122" class="code-line">中国本土では、<code>matrix.org</code> や <code>vector.im</code> ドメインが一部制限されていることがあります。Elementの通信が不安定になる場合は、<strong>これらのドメインをVPN経由に設定する</strong>ことで回避できます。</p>
+<h3 id="shadowsocks%EF%BC%88gfwlist%EF%BC%89%E3%82%92%E5%88%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88" data-line="124" class="code-line">
+<a class="header-anchor-link" href="#shadowsocks%EF%BC%88gfwlist%EF%BC%89%E3%82%92%E5%88%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88" aria-hidden="true"></a> Shadowsocks（gfwlist）を利用している場合</h3>
+<p data-line="126" class="code-line">以下の行を <code>gfwlist.js</code> に追加することで、必要な通信をVPNトンネルに通すことが可能です：</p>
+<div class="code-block-container"><pre class="shiki github-dark" style="background-color:#151e2c;color:#e1e4e8"><code class="code-line" data-line="128"><span class="line"><span style="color:#9ECBFF">"||matrix.org"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">"||vector.im"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"></span></code></pre></div><h2 id="%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" data-line="133" class="code-line">
+<a class="header-anchor-link" href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" aria-hidden="true"></a> トラブルシューティング</h2>
+<p data-line="134" class="code-line">残念ながら、Elementクライアントアプリにはいくつか問題があります。<br>
+以下にまとめておきます。</p>
+<h3 id="%E6%96%B0%E3%81%97%E3%81%84%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8B%E3%82%89%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%97%E3%81%9F%E3%81%A8%E3%81%8D%E3%80%81%E5%8F%A4%E3%81%84%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%AA%AD%E3%82%81%E3%81%AA%E3%81%84" data-line="137" class="code-line">
+<a class="header-anchor-link" href="#%E6%96%B0%E3%81%97%E3%81%84%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8B%E3%82%89%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%97%E3%81%9F%E3%81%A8%E3%81%8D%E3%80%81%E5%8F%A4%E3%81%84%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%8C%E8%AA%AD%E3%82%81%E3%81%AA%E3%81%84" aria-hidden="true"></a> 新しいデバイスからログインしたとき、古いメッセージが読めない</h3>
+<p data-line="138" class="code-line">新しいデバイスでログインしたとき、古いメッセージが復号化されないず、"Unable to decrypt message"というエラーが出る。理由不明だが、復号キーが同期されなかったとき起きるらしい。以下の手順で直ります。</p>
+<ol data-line="140" class="code-line">
+<li data-line="140" class="code-line">別のデバイスの「設定」→「Encryption」→「Advanced/Export keys」から復号キーをファイルに書き出して、新しいデバイスへファイルを転送。</li>
+<li data-line="141" class="code-line">新しいデバイスの「設定」→「Encryption」→「Advanced/Import keys」から復号キーをファイルから読み込む。</li>
+</ol>
+<h3 id="element-desktop%E3%81%A7%E3%81%AE%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E6%A4%9C%E7%B4%A2%E3%81%8C%E5%A4%9A%E8%A8%80%E8%AA%9E%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E4%BD%9C%E3%81%97%E3%81%AA%E3%81%84" data-line="143" class="code-line">
+<a class="header-anchor-link" href="#element-desktop%E3%81%A7%E3%81%AE%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E6%A4%9C%E7%B4%A2%E3%81%8C%E5%A4%9A%E8%A8%80%E8%AA%9E%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E4%BD%9C%E3%81%97%E3%81%AA%E3%81%84" aria-hidden="true"></a> Element Desktopでのメッセージ検索が多言語環境でうまく動作しない</h3>
+<p data-line="144" class="code-line">なぜか表示されている単語を検索してもヒットしないことがあります。<br>
+原因は、</p>
+<ul data-line="146" class="code-line">
+<li data-line="146" class="code-line">Element Desktopのメッセージ検索用のインデックスが、Element Desktopの言語設定に使われている言語用に構築されること、</li>
+<li data-line="147" class="code-line">日本語や他のアジア系の言語がインデックス作成時に解析されないこと、<br>
+の複合です。</li>
+</ul>
+<p data-line="150" class="code-line">端的に言えば、現在日本語や韓国語などの検索をしても、存在する単語がヒットしないことが多いです。<br>
+対策として、</p>
+<ul data-line="152" class="code-line">
+<li data-line="152" class="code-line">Element Desktopを英語環境に設定し、メッセージ検索用のインデックスを再構成すること (Setting -&gt; Security &amp; Privacy -&gt; Message search -&gt; Manage -&gt; Disable and enable)<br>
+をお勧めします。これで、英語メッセージ内の英単語の検索は動作します。</li>
+</ul>
+<p data-line="155" class="code-line">本格的な改善に向け、<a href="https://github.com/element-hq/element-meta/issues/2883" target="_blank" rel="nofollow noopener noreferrer">パッチを貢献すべく動き始めています</a>。</p>
+
+{% endraw %}

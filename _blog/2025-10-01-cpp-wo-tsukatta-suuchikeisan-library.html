@@ -1,0 +1,57 @@
+---
+layout: single
+title: "C++を使った数値計算ライブラリの整備で辛かったこと"
+date: 2025-10-01
+lang: ja
+excerpt: "この記事はC++を批判する意図はなく, 過去10年以上の数値計算ライブラリの開発経験を共有する目的で書かれている."
+original_url: "https://zenn.dev/h_shinaoka/articles/896539019fdd08"
+original_service: zenn
+permalink: /blog/cpp-wo-tsukatta-suuchikeisan-library/
+---
+
+{% raw %}
+<h2 id="%E3%81%BE%E3%81%88%E3%81%8C%E3%81%8D" data-line="0" class="code-line">
+<a class="header-anchor-link" href="#%E3%81%BE%E3%81%88%E3%81%8C%E3%81%8D" aria-hidden="true"></a> まえがき</h2>
+<p data-line="1" class="code-line">この記事はC++を批判する意図はなく, 過去10年以上の数値計算ライブラリの開発経験を共有する目的で書かれている.</p>
+<h2 id="%E3%81%BE%E3%81%A8%E3%82%81" data-line="3" class="code-line">
+<a class="header-anchor-link" href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-hidden="true"></a> まとめ</h2>
+<p data-line="4" class="code-line">特に, 標準的なパッケージマネージャー, コンパイラー, ビルドシステムの不在が辛い. 以下に項目ごとに具体的な感想を書いていこう.</p>
+<h2 id="%E6%A8%99%E6%BA%96%E7%9A%84%E3%81%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%AE%E4%B8%8D%E5%9C%A8" data-line="6" class="code-line">
+<a class="header-anchor-link" href="#%E6%A8%99%E6%BA%96%E7%9A%84%E3%81%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%AE%E4%B8%8D%E5%9C%A8" aria-hidden="true"></a> 標準的なパッケージマネージャーの不在</h2>
+<p data-line="7" class="code-line">Julia, Rustなどに存在する統一されたパッケージマネージャーがC++には存在しない. これにより, 以下の困難が生じる.</p>
+<ul data-line="9" class="code-line">
+<li data-line="9" class="code-line">自分が開発しているライブラリを機能ごとに分割しづらい. 例えば, いくつかのライブラリで共通の機能 (例えば, full-pivoting LU) を共通に使っている場合, その機能を単独のライブラリとして切り出したいことがある. これにより巨大なライブラリを機能が明確なライブラリ群に分割して管理しやすくなる上, コードの再利用が容易になる. しかし, 標準的なパッケージマネージャーの支援なしには分割は難しい. 結局, 巨大なモノリシックなライブラリやソフトウェアを作ることになる (油断すると, すぐにスパゲッティコード化する).</li>
+<li data-line="10" class="code-line">他者が書いたライブラリを再利用しづらい. 配布を容易にするために, 自分で再実装することになる.</li>
+<li data-line="11" class="code-line">作成したライブラリ・ソフトウェアを配布する際に, 依存するライブラリのインストール法など多岐に渡る点の配慮が必要になる.</li>
+</ul>
+<h2 id="%E3%83%93%E3%83%AB%E3%83%89%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0" data-line="13" class="code-line">
+<a class="header-anchor-link" href="#%E3%83%93%E3%83%AB%E3%83%89%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0" aria-hidden="true"></a> ビルドシステム</h2>
+<p data-line="14" class="code-line">上述の話にも関連しているが, ビルド時の依存性や手順などを指定するビルドシステムが多数存在する. 最近ポピュラーなのはCMakeだろうと思うが, 依存ライブラリの検出を安定的に行うことは難しく, 文法も一般的なプログラミング言語とはかなり異なる (すべての変数が文字列). 私は, LLMの助けなしには書くことが困難だった...</p>
+<p data-line="16" class="code-line">C++には規格がある. 新しいものほど標準ライブラリが充実したり, テンプレートを書きやすくなる. しかし, 最新の規格を使ってしまうと, コンパイラにバグがある可能性が高く, コンパイラごとに対応が必要になる. また, 配布する際にも, あらゆるコンパイラでのチェックが必要になる.</p>
+<p data-line="18" class="code-line">独立した実装があることはコミュニティにとって良いことではあるが, 便利な機能を使って楽をしようとすると, 逆に無用な労力を使うことになる.</p>
+<p data-line="20" class="code-line">さらに, 異なるコンパイラやバージョン間でABI互換性がない. つまり, 異なるABIを持つコンパイラで作成した複数の共有ライブラリを混ぜて使うことができない. これは, 最終的なソフトウェアに必要なすべての共有ライブラリのビルドの際に, ABI互換性が保証されたコンパイラを共通して使う必要があるということを意味する. これをユーザーに要求するのは極めて難しい.</p>
+<p data-line="22" class="code-line">もちろん, 内部実装はC++でも, <code>C-API</code> のみを利用して他のライブラリと連携する方法もある (例えば, 我々が作成した <a href="https://github.com/SpM-lab/libsparseir" target="_blank" rel="nofollow noopener noreferrer">libsparseir</a> でその設計を採用). しかし, <code>C-API</code> の整備はかなり技術的に難易度が高く, 手間もかかり, メモリ安全性も低い.</p>
+<h2 id="%E3%83%A1%E3%83%A2%E3%83%AA%E5%AE%89%E5%85%A8%E6%80%A7" data-line="24" class="code-line">
+<a class="header-anchor-link" href="#%E3%83%A1%E3%83%A2%E3%83%AA%E5%AE%89%E5%85%A8%E6%80%A7" aria-hidden="true"></a> メモリ安全性</h2>
+<p data-line="25" class="code-line">C++で書きたいものは, およそ基盤・低レベルのライブラリか, 大規模並列化向けの高性能アプリケーションソフトウェアが多いと思う. 静的な型付け言語であるC++はそれに向いているように思うが, その割に危険な挙動を簡単にできてしまう.</p>
+<p data-line="27" class="code-line">例として,</p>
+<ul data-line="29" class="code-line">
+<li data-line="29" class="code-line">一時オブジェクトへの参照を関数から <code>return</code> してしまう</li>
+<li data-line="30" class="code-line">同じオブジェクトへの書き込み権限を持ったオブジェクトが複数存在する</li>
+</ul>
+<p data-line="32" class="code-line">などがある. 特に後者はJuliaやPythonでも同じであるが, こちらは生産性を優先した言語で, 設計上許容されていると思う. しかし, 安定してほしい基盤・低レベルライブラリを書くときに, このようなヒューマンエラーを機械的にチェックしてくれないのは辛い.</p>
+<h2 id="%E5%A4%9A%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%A8%E7%B7%9A%E5%BD%A2%E6%BC%94%E7%AE%97%E3%81%AE%E6%A8%99%E6%BA%96%E7%9A%84%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88" data-line="34" class="code-line">
+<a class="header-anchor-link" href="#%E5%A4%9A%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%A8%E7%B7%9A%E5%BD%A2%E6%BC%94%E7%AE%97%E3%81%AE%E6%A8%99%E6%BA%96%E7%9A%84%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88" aria-hidden="true"></a> 多次元配列と線形演算の標準的サポート</h2>
+<p data-line="35" class="code-line">標準的なライブラリはEigen3だと思う. JAXのバックエンド等にも使われている. メインブランチへのコミットは続けられているが, 最後のオフィシャルなリリースは2021年に遡る. また, 多次元配列のサポートは, まだ非公式機能扱いである. とりあえずバグには遭遇しなかったが, このままでいいのか.</p>
+<h2 id="%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90%E3%81%AE%E6%A8%99%E6%BA%96%E7%9A%84%E3%81%AA%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%AE%E6%AC%A0%E5%A6%82" data-line="37" class="code-line">
+<a class="header-anchor-link" href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90%E3%81%AE%E6%A8%99%E6%BA%96%E7%9A%84%E3%81%AA%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%AE%E6%AC%A0%E5%A6%82" aria-hidden="true"></a> ドキュメント作成の標準的な仕組みの欠如</h2>
+<p data-line="38" class="code-line">C++には, JuliaのDocumenter.jlやRustのrustdocのような, 標準的なドキュメント作成ツールが存在しない. 結果として,</p>
+<ul data-line="40" class="code-line">
+<li data-line="40" class="code-line">APIリファレンスやユーザーガイドの自動生成が困難</li>
+<li data-line="41" class="code-line">プロジェクト間でドキュメントのスタイルやフォーマットがバラバラ</li>
+<li data-line="42" class="code-line">ドキュメント作成が後回しにされがち</li>
+</ul>
+<p data-line="44" class="code-line">という状況になりやすい. 実際にはDoxygenやSphinxなどを組み合わせて使うことが多いが, セットアップが複雑で初学者にはハードルが高い. また, コメント形式がプロジェクトごとに異なっていたり, マークアップの流儀も統一されていない.</p>
+<p data-line="46" class="code-line">ライブラリを他人に使ってもらおうとしたとき, ドキュメントが整っていないのは致命的だが, そのためのサポートが言語側から一貫して提供されていないのは辛い.</p>
+
+{% endraw %}

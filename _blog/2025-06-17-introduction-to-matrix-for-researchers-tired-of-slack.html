@@ -1,0 +1,178 @@
+---
+layout: single
+title: "Introduction to Matrix for Researchers Tired of Slack"
+date: 2025-06-17
+lang: en
+excerpt: "If you're involved in multiple international collaborations or interdisciplinary projects, you may find your number of Slack workspaces gradually increasing—making it difficult to manage them all. Even sending a simple DM requires remembering which workspace to use, and notifications become fragmented."
+original_url: "https://zenn.dev/h_shinaoka/articles/e0bd698420688e"
+original_service: zenn
+permalink: /blog/introduction-to-matrix-for-researchers-tired-of-slack/
+---
+
+{% raw %}
+<h2 id="flexible-and-sustainable-research-communication-enabled-by-a-decentralized-chat-protocol" data-line="1" class="code-line">
+<a class="header-anchor-link" href="#flexible-and-sustainable-research-communication-enabled-by-a-decentralized-chat-protocol" aria-hidden="true"></a> Flexible and Sustainable Research Communication Enabled by a Decentralized Chat Protocol</h2>
+<p data-line="3" class="code-line">If you're involved in multiple international collaborations or interdisciplinary projects, you may find your number of Slack workspaces gradually increasing—making it difficult to manage them all.<br>
+Even sending a simple DM requires remembering which workspace to use, and notifications become fragmented.</p>
+<p data-line="6" class="code-line">To address these issues, I recently migrated to <strong>Matrix + Element</strong>. As a decentralized protocol, Matrix is exceptionally well-suited to academic collaboration. This article introduces its key features and how researchers can make the most of it.</p>
+<p data-line="8" class="code-line">Note: Matrix has issues with message search in multilingual environments. Please use it in English for best results (see Troubleshooting section below).</p>
+<hr data-line="10" class="code-line">
+<h2 id="getting-started" data-line="12" class="code-line">
+<a class="header-anchor-link" href="#getting-started" aria-hidden="true"></a> Getting Started</h2>
+<ul data-line="14" class="code-line">
+<li data-line="14" class="code-line"><a href="https://element.io" target="_blank" rel="nofollow noopener noreferrer">https://element.io</a></li>
+<li data-line="15" class="code-line"><a href="https://element.io/download" target="_blank" rel="nofollow noopener noreferrer">https://element.io/download</a></li>
+</ul>
+<p data-line="17" class="code-line">Download and launch the client app from the download page, then create an account on <code>matrix.org</code>.<br>
+Alternatively, you can launch the Element web client from the same page and register there. Using the web client for registration tends to reduce potential issues.</p>
+<p data-line="20" class="code-line"><em>Please set the Element Desktop app to English mode for an accurate search for English terms.</em></p>
+<hr data-line="22" class="code-line">
+<h2 id="what-is-matrix%3F" data-line="24" class="code-line">
+<a class="header-anchor-link" href="#what-is-matrix%3F" aria-hidden="true"></a> What is Matrix?</h2>
+<p data-line="26" class="code-line">Matrix is a <strong>decentralized, open chat protocol</strong>. Users create accounts on arbitrary servers known as <em>homeservers</em>.<br>
+Crucially, <strong>users on different homeservers can communicate seamlessly</strong>, regardless of server affiliation.<br>
+(For researchers, the default homeserver <code>matrix.org</code>—which is free—should be sufficient.)</p>
+<p data-line="30" class="code-line">For example, users like <code>@alice:uni-wien.at</code> and <code>@bob:myuniv.jp</code> can freely send DMs or join the same room.<br>
+This is in stark contrast to Slack, where workspaces are siloed.</p>
+<hr data-line="33" class="code-line">
+<h2 id="case-study%3A-tu-wien" data-line="35" class="code-line">
+<a class="header-anchor-link" href="#case-study%3A-tu-wien" aria-hidden="true"></a> Case Study: TU Wien</h2>
+<p data-line="37" class="code-line">At TU Wien (Vienna University of Technology), Matrix has been adopted as the official chat platform, branded as <em>TUmatrix</em>.<br>
+The university’s IT department hosts the homeserver, and researchers can use their university accounts to log in directly.</p>
+<blockquote data-line="40" class="code-line">
+<p data-line="40" class="code-line">🔗 <a href="https://www.it.tuwien.ac.at/en/services/communication-and-collaboration/tumatrix" target="_blank" rel="nofollow noopener noreferrer">Official TUmatrix Page</a></p>
+</blockquote>
+<p data-line="42" class="code-line">This shows how <strong>Matrix can serve as robust infrastructure even at the institutional level</strong>.</p>
+<hr data-line="44" class="code-line">
+<h2 id="organizing-rooms-with-spaces" data-line="46" class="code-line">
+<a class="header-anchor-link" href="#organizing-rooms-with-spaces" aria-hidden="true"></a> Organizing Rooms with Spaces</h2>
+<p data-line="48" class="code-line">Matrix offers a feature called <em>Spaces</em>, which works similarly to Slack’s workspaces, allowing for hierarchical organization of rooms.<br>
+Example setup:</p>
+<ul data-line="51" class="code-line">
+<li data-line="51" class="code-line">
+<p data-line="51" class="code-line"><strong>Lab Space</strong></p>
+<ul data-line="52" class="code-line">
+<li data-line="52" class="code-line">Seminar Announcements</li>
+<li data-line="53" class="code-line">Paper Reading Group</li>
+<li data-line="54" class="code-line">Lounge Chat</li>
+</ul>
+</li>
+<li data-line="56" class="code-line">
+<p data-line="56" class="code-line"><strong>International Collaboration Space</strong></p>
+<ul data-line="57" class="code-line">
+<li data-line="57" class="code-line">Theory Subgroup</li>
+<li data-line="58" class="code-line">Experimental Subgroup</li>
+<li data-line="59" class="code-line">General Meetings</li>
+</ul>
+</li>
+</ul>
+<p data-line="61" class="code-line">Such nesting makes it easy to manage multiple concurrent research projects.</p>
+<hr data-line="63" class="code-line">
+<h2 id="recommended-clients" data-line="65" class="code-line">
+<a class="header-anchor-link" href="#recommended-clients" aria-hidden="true"></a> Recommended Clients</h2>
+<p data-line="67" class="code-line">Two official clients are recommended:</p>
+<ul data-line="69" class="code-line">
+<li data-line="69" class="code-line">
+<p data-line="69" class="code-line"><strong>PC / Web</strong>: <a href="https://element.io" target="_blank" rel="nofollow noopener noreferrer">Element</a><br>
+→ Stable and feature-complete—ideal for academic use.</p>
+</li>
+<li data-line="72" class="code-line">
+<p data-line="72" class="code-line"><strong>Smartphone</strong>: Element X<br>
+→ Designed as a next-gen client: extremely fast, lightweight, and E2EE-compatible.<br>
+Note: Space view is not fully supported yet; all rooms are shown in a flat list.</p>
+</li>
+</ul>
+<p data-line="76" class="code-line">Avoid using the older "Element Messenger" app, which is known for slow syncing.</p>
+<hr data-line="78" class="code-line">
+<h2 id="message-history-is-not-deleted" data-line="80" class="code-line">
+<a class="header-anchor-link" href="#message-history-is-not-deleted" aria-hidden="true"></a> Message History is Not Deleted</h2>
+<p data-line="82" class="code-line">In Matrix, <strong>chat history is generally retained</strong>.<br>
+As long as you remain in the room, past messages are searchable.</p>
+<p data-line="85" class="code-line">This is vital for academic communication:</p>
+<ul data-line="87" class="code-line">
+<li data-line="87" class="code-line">Preserves long-term discussions</li>
+<li data-line="88" class="code-line">Stores seminar logs and meeting minutes</li>
+<li data-line="89" class="code-line">Archives early-stage ideas and review comments</li>
+</ul>
+<hr data-line="91" class="code-line">
+<h2 id="file-sharing-and-storage-location" data-line="93" class="code-line">
+<a class="header-anchor-link" href="#file-sharing-and-storage-location" aria-hidden="true"></a> File Sharing and Storage Location</h2>
+<p data-line="95" class="code-line">Uploaded files are stored on the user’s homeserver.<br>
+For example, if <code>@you:matrix.org</code> uploads a file, it's stored on <code>matrix.org</code>.</p>
+<p data-line="98" class="code-line">While <code>matrix.org</code> is a robust and free public server, avoid storing large files long-term.<br>
+Consider contributing to the ecosystem via paid options like Element One.</p>
+<hr data-line="101" class="code-line">
+<h2 id="hosting-your-own-homeserver" data-line="103" class="code-line">
+<a class="header-anchor-link" href="#hosting-your-own-homeserver" aria-hidden="true"></a> Hosting Your Own Homeserver</h2>
+<p data-line="105" class="code-line">For most research use cases, <code>matrix.org</code> suffices.<br>
+However, you may want to host your own server if:</p>
+<ul data-line="108" class="code-line">
+<li data-line="108" class="code-line">You need project-level account management</li>
+<li data-line="109" class="code-line">You want to handle large files</li>
+<li data-line="110" class="code-line">You have custom data retention policies</li>
+</ul>
+<p data-line="112" class="code-line">With <strong>Synapse</strong> (the official server implementation), self-hosting is relatively easy.<br>
+Alternatively, use a service like <a href="https://modular.im" target="_blank" rel="nofollow noopener noreferrer">modular.im</a> for hosted solutions.</p>
+<p data-line="115" class="code-line">One of Matrix’s core strengths is that <strong>users on custom homeservers can still interact seamlessly with others</strong>.</p>
+<hr data-line="117" class="code-line">
+<h2 id="security%3A-supports-end-to-end-encryption-(e2ee)" data-line="119" class="code-line">
+<a class="header-anchor-link" href="#security%3A-supports-end-to-end-encryption-(e2ee)" aria-hidden="true"></a> Security: Supports End-to-End Encryption (E2EE)</h2>
+<p data-line="121" class="code-line">Matrix supports <strong>end-to-end encryption</strong>.<br>
+Private rooms are encrypted by default, and neither messages nor attachments can be read—even by the homeserver.</p>
+<p data-line="124" class="code-line">No complex configuration needed—Element handles encryption automatically.</p>
+<hr data-line="126" class="code-line">
+<h2 id="usage-from-mainland-china" data-line="128" class="code-line">
+<a class="header-anchor-link" href="#usage-from-mainland-china" aria-hidden="true"></a> Usage from Mainland China</h2>
+<p data-line="130" class="code-line">In mainland China, domains like <code>matrix.org</code> and <code>vector.im</code> may be partially restricted.<br>
+If Element connectivity is unstable, consider routing these domains through a VPN.</p>
+<h3 id="using-shadowsocks-(gfwlist)" data-line="133" class="code-line">
+<a class="header-anchor-link" href="#using-shadowsocks-(gfwlist)" aria-hidden="true"></a> Using Shadowsocks (gfwlist)</h3>
+<p data-line="135" class="code-line">Add the following lines to <code>gfwlist.js</code> to route the required domains through VPN:</p>
+<div class="code-block-container"><pre class="shiki github-dark" style="background-color:#151e2c;color:#e1e4e8"><code class="code-line" data-line="137"><span class="line"><span style="color:#9ECBFF">"||matrix.org"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">"||vector.im"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"></span></code></pre></div><h2 id="troubleshooting" data-line="142" class="code-line">
+<a class="header-anchor-link" href="#troubleshooting" aria-hidden="true"></a> Troubleshooting</h2>
+<p data-line="144" class="code-line">Element still has a few issues worth noting.</p>
+<h3 id="old-messages-cannot-be-decrypted-on-a-new-device" data-line="146" class="code-line">
+<a class="header-anchor-link" href="#old-messages-cannot-be-decrypted-on-a-new-device" aria-hidden="true"></a> Old Messages Cannot Be Decrypted on a New Device</h3>
+<p data-line="148" class="code-line">When logging in from a new device, older messages may fail to decrypt, displaying an error such as "Unable to decrypt message".<br>
+This usually occurs when encryption keys were not properly synced across devices.</p>
+<h4 id="solution" data-line="151" class="code-line">
+<a class="header-anchor-link" href="#solution" aria-hidden="true"></a> Solution</h4>
+<ol data-line="153" class="code-line">
+<li data-line="153" class="code-line">
+<p data-line="153" class="code-line">On your existing device:<br>
+Go to <code>Settings</code> → <code>Security &amp; Privacy</code> → <code>Encryption</code> → <code>Advanced</code> → <strong>Export keys</strong><br>
+Export the decryption keys to a file and transfer it to the new device.</p>
+</li>
+<li data-line="157" class="code-line">
+<p data-line="157" class="code-line">On the new device:<br>
+Go to <code>Settings</code> → <code>Security &amp; Privacy</code> → <code>Encryption</code> → <code>Advanced</code> → <strong>Import keys</strong><br>
+Import the keys from the previously exported file.</p>
+</li>
+</ol>
+<hr data-line="161" class="code-line">
+<h3 id="message-search-fails-in-multilingual-environments-(e.g.%2C-japanese)" data-line="163" class="code-line">
+<a class="header-anchor-link" href="#message-search-fails-in-multilingual-environments-(e.g.%2C-japanese)" aria-hidden="true"></a> Message Search Fails in Multilingual Environments (e.g., Japanese)</h3>
+<p data-line="165" class="code-line">Sometimes even clearly visible words fail to appear in search results.</p>
+<h4 id="cause" data-line="167" class="code-line">
+<a class="header-anchor-link" href="#cause" aria-hidden="true"></a> Cause</h4>
+<ul data-line="169" class="code-line">
+<li data-line="169" class="code-line">Element Desktop builds its search index based on the current UI language.</li>
+<li data-line="170" class="code-line">Non-Western languages (e.g., Japanese, Korean) are not tokenized properly during index creation.</li>
+</ul>
+<h4 id="workaround" data-line="172" class="code-line">
+<a class="header-anchor-link" href="#workaround" aria-hidden="true"></a> Workaround</h4>
+<p data-line="174" class="code-line">Switch to an English UI and rebuild the search index:</p>
+<ol data-line="176" class="code-line">
+<li data-line="176" class="code-line">Go to <code>Settings</code> → <code>Security &amp; Privacy</code> → <code>Message search</code> → <code>Manage</code>
+</li>
+<li data-line="177" class="code-line">Disable and then enable message search again</li>
+</ol>
+<p data-line="179" class="code-line">This will rebuild the index using English-language tokenization, which works reliably for English content.</p>
+<h4 id="ongoing-fix" data-line="181" class="code-line">
+<a class="header-anchor-link" href="#ongoing-fix" aria-hidden="true"></a> Ongoing Fix</h4>
+<p data-line="183" class="code-line">A patch is currently being proposed to improve multilingual search support:<br>
+<a href="https://github.com/element-hq/element-meta/issues/2883" target="_blank" rel="nofollow noopener noreferrer">GitHub Issue #2883</a></p>
+
+{% endraw %}

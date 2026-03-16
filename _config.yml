@@ -5,6 +5,21 @@ locale                   : "en"
 title                    : "Shinaoka Group"
 name                     : "Hiroshi Shinaoka"
 
+collections:
+  blog:
+    output: true
+    permalink: /blog/:path/
+
 # This will require each of these plugins automatically.
 plugins:
   - jekyll-include-cache
+
+defaults:
+  - scope:
+      path: ""
+      type: blog
+    values:
+      layout: single
+      author_profile: false
+      classes: wide
+      toc: true
