@@ -3,7 +3,7 @@
 ### By Train and Bus
 
 1. Take the **Keihin-Tohoku Line (JK)** to **Kita-Urawa Station**.
-2. From [the bus stop](https://www.google.com/maps/search/?api=1&query=35.871569069264034,139.64573722331843) in front of Mos Burger, take a local bus.
+2. From [the bus stop](https://www.google.com/maps/search/?api=1&query=35.87132349626283,139.64512967968776) in front of Mos Burger, take a local bus.
    All buses departing from this bus stop go to Saitama University.
 3. If there is a queue, please wait for the next bus. Buses are frequent.
 
