@@ -3,7 +3,7 @@
 
 ### Faculty
 
-* 品岡寛 (Hiroshi SHINAOKA) Associate Professor [shinaoka@mail.saitama-u.ac.jp](<mailto:shinaoka@mail.saitama-u.ac.jp>)
+* 品岡寛 (Hiroshi SHINAOKA) Professor [shinaoka@mail.saitama-u.ac.jp](<mailto:shinaoka@mail.saitama-u.ac.jp>)
 
 ### Secretary
 
@@ -18,22 +18,23 @@
 ### Post doc
 * 稲吉健 (Ken INAYOSHI) [特定助教/Program-Specific Assistant Professor]
 
-### Doctor course
+### Students
 * 石田洋音 (Hirone ISHIDA)
-
-### Master course
-* 富田樹 (Tatsuki TOMITA)
-* 柿沼優汰  (旧星野研)
-* 杉山陽一 (旧星野研)
-* 山崎勇輝 (旧星野研)
-
-### Undergraduate course
 * 櫻庭玲央那
 * 伊藤純也
+* 高山優樹
 * 東川喜斗
+* 黒沢睦
+* 三宅咲緩
+* 土持遼磨
+* 梶本百合太
 
 ## Former members
 
+* 富田樹 (Tatsuki TOMITA) (M)
+* 柿沼優汰 (M)
+* 杉山陽一 (M)
+* 山崎勇輝 (M)
 * 松下優貴 (Yuki MATSUSHITA) (B)
 * 里野雄基 (Yuuki SATONO) (M)
 * 仲田海人 (Kaito NAKADA) (B)
