@@ -18,11 +18,15 @@
 ### Post doc
 * 稲吉健 (Ken INAYOSHI) [特定助教/Program-Specific Assistant Professor]
 
-### Students
+### Ph.D. course
 * 石田洋音 (Hirone ISHIDA)
+
+### Master course
 * 櫻庭玲央那
 * 伊藤純也
 * 高山優樹
+
+### Bachelor course
 * 東川喜斗
 * 黒沢睦
 * 三宅咲緩
