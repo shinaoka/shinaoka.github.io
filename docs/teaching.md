@@ -1,6 +1,7 @@
 ## 講義ノート
 
 * [Julia Spring School 2026 講義ノート](/julia_spring_school_2026/)
+* [Introduction to Quantics Tensor Train (新潟大学 2025)](/assets/niigata-qtt-lecture-2025.pdf) ([GitHubリポジトリ](https://github.com/shinaoka/niigata-qtt-lecture-2025))
 
 ## 学部講義
 
