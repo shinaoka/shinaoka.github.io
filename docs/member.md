@@ -16,10 +16,10 @@
 * Satoshi TERASAKI (programmer)
 
 ### Post doc
-* 稲吉健 (Ken INAYOSHI) [特定助教/Program-Specific Assistant Professor]
+* [稲吉健 (Ken INAYOSHI)](https://sites.google.com/view/ken-inayoshi/home) [特定助教/Program-Specific Assistant Professor]
 
 ### Ph.D. course
-* 石田洋音 (Hirone ISHIDA)
+* [石田洋音 (Hirone ISHIDA)](https://hironeishida.github.io/ja/index.html)
 
 ### Master course
 * 櫻庭玲央那
