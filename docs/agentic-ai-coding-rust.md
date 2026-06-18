@@ -10,7 +10,7 @@
 
 講義の補助資料は，講義の1週間前までを目処にこのページに掲載します．
 
-* スライド: [日本語 (PDF)](https://github.com/shinaoka/agentic-ai-coding-rust/blob/main/slides.pdf) ・ [English (PDF)](https://github.com/shinaoka/agentic-ai-coding-rust/blob/main/slides_en.pdf) （[Typst ソース](https://github.com/shinaoka/agentic-ai-coding-rust)）
+* スライド: [日本語 (PDF)](https://raw.githubusercontent.com/shinaoka/agentic-ai-coding-rust/main/slides.pdf) ・ [English (PDF)](https://raw.githubusercontent.com/shinaoka/agentic-ai-coding-rust/main/slides_en.pdf) （[Typst ソース](https://github.com/shinaoka/agentic-ai-coding-rust)）
 * ハンズオン資料: 準備中
 * サンプルコード: 準備中
 
