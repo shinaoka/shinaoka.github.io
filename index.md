@@ -19,3 +19,4 @@ Recent essays on Julia, Rust, scientific software, and researcher tooling are co
 
 [Read the blog](/blog/){: .btn .btn--primary .btn--large}
 [Julia Spring School 2026 Lecture Notes](/julia_spring_school_2026/){: .btn .btn--info .btn--large}
+[Agentic AI Coding × Rust](/docs/agentic-ai-coding-rust){: .btn .btn--warning .btn--large}

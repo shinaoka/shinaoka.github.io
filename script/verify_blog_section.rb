@@ -20,6 +20,13 @@ index_html = read_file(File.join(site_root, "index.html"))
 assert(index_html, "missing generated homepage")
 assert(index_html.include?("/blog/"), "homepage should link to /blog/")
 assert(index_html.include?(">Blog<") || index_html.include?("Blog"), "homepage should expose Blog navigation")
+assert(
+  index_html.include?('/docs/agentic-ai-coding-rust'),
+  "homepage should promote agentic-ai-coding-rust"
+)
+
+agentic_page = File.join(site_root, "docs", "agentic-ai-coding-rust.html")
+assert(File.exist?(agentic_page), "missing generated agentic-ai-coding-rust page")
 
 blog_index = File.join(site_root, "blog", "index.html")
 blog_html = read_file(blog_index)
