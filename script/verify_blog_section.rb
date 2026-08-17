@@ -32,6 +32,15 @@ blog_index = File.join(site_root, "blog", "index.html")
 blog_html = read_file(blog_index)
 assert(blog_html, "missing generated blog index page")
 assert(blog_html.include?("/julia_spring_school_2026/"), "blog index should promote julia_spring_school_2026")
+assert(blog_html.include?("/blog/matrix-encryption-setup-checklist-ja/"), "blog index should promote Matrix encryption guides")
+
+software_html = read_file(File.join(site_root, "docs", "software.html"))
+assert(software_html, "missing generated software page")
+assert(software_html.include?("/blog/matrix-encryption-setup-checklist/"), "software page should link to Matrix encryption guides")
+
+matrix_intro_html = read_file(File.join(site_root, "blog", "introduction-to-matrix-for-researchers-tired-of-slack", "index.html"))
+assert(matrix_intro_html, "missing generated English Matrix introduction")
+assert(matrix_intro_html.include?("/blog/matrix-encryption-setup-checklist/"), "Matrix introduction should link to setup checklist")
 
 teaching_html = read_file(File.join(site_root, "docs", "teaching.html"))
 assert(teaching_html, "missing generated teaching page")
@@ -44,7 +53,11 @@ expected_blog_pages = [
   "naze-cpp-kara-rust-he-ikoushitaka",
   "cpp-wo-tsukatta-suuchikeisan-library",
   "introduction-to-matrix-for-researchers-tired-of-slack",
-  "slack-ni-tsukareta-kenkyusha-no-tame-no-matrix-nyumon"
+  "slack-ni-tsukareta-kenkyusha-no-tame-no-matrix-nyumon",
+  "matrix-encryption-setup-checklist-ja",
+  "matrix-encryption-setup-checklist",
+  "matrix-encryption-safety-recovery-checklist-ja",
+  "matrix-encryption-safety-recovery-checklist"
 ]
 
 expected_blog_pages.each do |slug|
