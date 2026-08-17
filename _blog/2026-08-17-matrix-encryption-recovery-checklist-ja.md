@@ -16,7 +16,7 @@ toc_label: "目次"
 <div class="notice--danger" markdown="1">
 ## 確認が終わるまで、現在ログインしている端末を失わないでください
 
-ログアウト、アプリの削除・再インストール、ブラウザーのサイトデータ削除、セッション削除、Secure BackupやデジタルIDのリセットを行わないでください。今読めている端末だけが、まだバックアップされていない復号鍵を持っている可能性があります。
+ログアウト、アプリの削除・再インストール、セッション削除、Secure BackupやデジタルIDのリセットを行わないでください。今読めている端末だけが、まだバックアップされていない復号鍵を持っている可能性があります。
 </div>
 
 ## 最初に確認する完了条件
@@ -34,7 +34,7 @@ toc_label: "目次"
 - [ ] **Other Sessions → Verified: Ready for secure messaging**を確認する
 - [ ] **Unverified: Not ready for secure messaging**にある使用中の端末を記録する
 
-`account.matrix.org`の端末一覧はログインセッションの管理用です。暗号学的に検証済みかどうかは、ElementのSessions画面の緑の盾またはVerifiedフィルターで判断してください。同じPCでも、ブラウザー、Element Desktop、Koushiは別端末です。
+`account.matrix.org`の端末一覧はログインセッションの管理用です。暗号学的に検証済みかどうかは、ElementのSessions画面の緑の盾またはVerifiedフィルターで判断してください。同じPCでも、Element DesktopとKoushiは別端末です。
 
 ### 次に進む分岐
 
@@ -90,8 +90,6 @@ export完了後に限り、Element Desktopで次を実行します。
 ## 3. Element Xへ移行する
 
 この節はスマートフォンと対応するMacが対象です。**Windows版Element Xはありません。** WindowsではElement Desktopを検証済みの基準端末として維持し、リカバリーキーとSecure Backupを使って回復経路を確保してください。
-
-すでにログイン済みのElement Webだけが古いメッセージを読める場合は、回復が終わるまでそのブラウザーのサイトデータを削除しないでください。ただし、新規設定と通常運用にはElement Desktopを使います。
 
 - [ ] スマートフォンの旧Elementを消す前に、上記の鍵退避・回復を終える
 - [ ] [Element X](https://element.io/en/download)をインストールする

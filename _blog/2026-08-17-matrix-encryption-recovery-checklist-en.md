@@ -16,7 +16,7 @@ toc_label: "Contents"
 <div class="notice--danger" markdown="1">
 ## Do not lose your currently signed-in devices while checking recovery
 
-Do not sign out, reinstall an app, clear browser site data, delete a session, or reset Secure Backup or your cryptographic identity yet. A device that can currently read old messages may hold the only remaining copy of room keys that were never backed up.
+Do not sign out, reinstall an app, delete a session, or reset Secure Backup or your cryptographic identity yet. A device that can currently read old messages may hold the only remaining copy of room keys that were never backed up.
 </div>
 
 ## Completion criteria
@@ -34,7 +34,7 @@ Do not sign out, reinstall an app, clear browser site data, delete a session, or
 - [ ] Review **Other Sessions → Verified: Ready for secure messaging**
 - [ ] Record active devices under **Unverified: Not ready for secure messaging**
 
-The device list on `account.matrix.org` manages login sessions; it does not reliably show cryptographic verification. Use the green shield and Verified filter in Element. A browser, Element Desktop, and Koushi on the same computer are separate Matrix devices.
+The device list on `account.matrix.org` manages login sessions; it does not reliably show cryptographic verification. Use the green shield and Verified filter in Element. Element Desktop and Koushi on the same computer are separate Matrix devices.
 
 ### Choose the matching path
 
@@ -90,8 +90,6 @@ If you have no valid recovery key, verified device, or signed-in session that ca
 ## 3. Move phones to Element X
 
 This section applies to phones and supported Macs. **Element X is not available for Windows.** On Windows, keep Element Desktop as a verified reference session and protect recovery with your recovery key and Secure Backup.
-
-If an already signed-in Element Web session is the only client that can read old messages, do not clear its browser data until recovery is complete. Use Element Desktop for new setup and normal operation.
 
 - [ ] Before removing legacy Element, finish the key exports and recovery work above
 - [ ] Install [Element X](https://element.io/en/download)
