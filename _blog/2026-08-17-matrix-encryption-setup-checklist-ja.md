@@ -26,6 +26,16 @@ Matrixの暗号化メッセージを読むための鍵は、アカウントの�
 - **端末検証**は、新しい端末を自分の正当な端末として暗号学的に承認する操作です。
 - スマートフォンでは、従来のElement（Element Classic）ではなく**Element X**を使うことを強く推奨します。
 
+## OSごとの推奨クライアント
+
+| OS | 推奨クライアント | 暗号鍵を守るための役割 |
+| --- | --- | --- |
+| Windows | **Element Desktop** | Windows版Element Xはないため、検証済みの基準端末としてSecure Backupへ接続する |
+| macOS | **Element Desktop**。対応機種ではElement Xも併用可能 | Element Xを追加の検証済み端末として利用できる |
+| iPhone / Android | **Element X** | ログイン後に必ず端末検証し、Secure Backupへ接続する |
+
+Windowsでも安全性の要点は同じです。Element Desktopを検証済みにし、リカバリーキーを保存し、Secure Backupが有効であることを確認してください。Element Xを使えないこと自体が、暗号化メッセージを利用できないという意味ではありません。
+
 ## 利用開始チェックリスト
 
 ### 1. 最初の端末とリカバリーキー
@@ -37,17 +47,15 @@ Matrixの暗号化メッセージを読むための鍵は、アカウントの�
 
 保存先には、パスワードマネージャー、暗号化した外部メディア、施錠できる場所に保管した紙などを使います。チャット内、自分宛てメール、暗号化されていないメモには保存しないでください。
 
-Element Web/DesktopのEncryption画面で、**Get recovery key**と表示される場合は未設定、**Change recovery key**と表示される場合は設定済みです。
+Element DesktopのEncryption画面で、**Get recovery key**と表示される場合は未設定、**Change recovery key**と表示される場合は設定済みです。
 
 ### 2. 最初の端末を検証する
 
-- [ ] [Element WebのSessions画面](https://app.element.io/#/settings/sessions)を開いた
+- [ ] Element Desktopで **プロフィール画像 → All Settings → Sessions** を開いた
 - [ ] **Current Session**に緑の盾が表示されている
 - [ ] Encryption画面でSecure Backupが有効になっている
 
-直接リンクが開かない場合は、Element Web/Desktopで **プロフィール画像 → All Settings → Sessions** と進みます。
-
-### 3. Element Xを追加する
+### 3. スマートフォンではElement Xを追加する
 
 - [ ] スマートフォンへ[Element X](https://element.io/en/download)をインストールした
 - [ ] 同じMatrixアカウントでログインした
@@ -80,4 +88,3 @@ Element Web/DesktopのEncryption画面で、**Get recovery key**と表示され�
 - [How to Verify Devices](https://docs.element.io/latest/element-support/device-verification/how-to-verify-devices/)
 - [Element Sessions](https://docs.element.io/latest/element-support/element-webdesktop-client-settings/sessions/)
 - [Element downloads](https://element.io/en/download)
-

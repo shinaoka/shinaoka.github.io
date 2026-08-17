@@ -26,6 +26,16 @@ The keys needed to read encrypted Matrix messages are managed separately from yo
 - **Device verification** cryptographically confirms that a new login session belongs to you.
 - On phones, use **Element X**, not the legacy Element/Element Classic app.
 
+## Recommended client by operating system
+
+| OS | Recommended client | Encryption-recovery role |
+| --- | --- | --- |
+| Windows | **Element Desktop** | Element X is not available for Windows, so keep this as a verified reference session connected to Secure Backup |
+| macOS | **Element Desktop**; Element X can be added on supported Macs | Element X can provide an additional verified session |
+| iPhone / Android | **Element X** | Verify it after login and connect it to Secure Backup |
+
+Windows users can use encrypted Matrix rooms safely without Element X. Verify Element Desktop, store the recovery key, and confirm that Secure Backup is active.
+
 ## First-day checklist
 
 ### 1. Set up the first device and recovery key
@@ -37,17 +47,15 @@ The keys needed to read encrypted Matrix messages are managed separately from yo
 
 Good storage choices include a password manager, encrypted removable storage, or a printed copy kept in a locked location. Do not store it in a chat message, ordinary email, or an unencrypted note.
 
-In Element Web/Desktop, **Get recovery key** means that one has not been configured. **Change recovery key** means that recovery is configured.
+In Element Desktop, **Get recovery key** means that one has not been configured. **Change recovery key** means that recovery is configured.
 
 ### 2. Verify the first device
 
-- [ ] Open the [Element Web Sessions page](https://app.element.io/#/settings/sessions)
+- [ ] In Element Desktop, open **profile picture → All Settings → Sessions**
 - [ ] Confirm that **Current Session** has a green shield
 - [ ] Confirm on the Encryption page that Secure Backup is active
 
-If the direct link does not work, use **profile picture → All Settings → Sessions** in Element Web/Desktop.
-
-### 3. Add Element X
+### 3. Add Element X on your phone
 
 - [ ] Install [Element X](https://element.io/en/download) on your phone
 - [ ] Sign in with the same Matrix account
@@ -80,4 +88,3 @@ If you have not confirmed your recovery key, verified devices, and Secure Backup
 - [How to Verify Devices](https://docs.element.io/latest/element-support/device-verification/how-to-verify-devices/)
 - [Element Sessions](https://docs.element.io/latest/element-support/element-webdesktop-client-settings/sessions/)
 - [Element downloads](https://element.io/en/download)
-

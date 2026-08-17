@@ -7,6 +7,7 @@
 ### Matrix communication and encryption guides
 
 * [Koushi](https://github.com/shinaoka/koushi-matrix) — an experimental Matrix client for macOS (currently dogfooding; Windows support is not yet tested)
+* **Windows:** use [Element Desktop](https://element.io/en/download). Element X is not available for Windows; verify the Element Desktop session and enable Secure Backup.
 * **New Matrix users:** [日本語の暗号化設定チェックリスト](/blog/matrix-encryption-setup-checklist-ja/) / [English setup checklist](/blog/matrix-encryption-setup-checklist/)
 * **Existing Matrix users:** [日本語の安全確認・回復チェックリスト](/blog/matrix-encryption-safety-recovery-checklist-ja/) / [English safety and recovery checklist](/blog/matrix-encryption-safety-recovery-checklist/)
 

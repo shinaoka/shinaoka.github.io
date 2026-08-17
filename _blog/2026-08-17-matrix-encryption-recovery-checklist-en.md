@@ -29,19 +29,17 @@ Do not sign out, reinstall an app, clear browser site data, delete a session, or
 
 ## 1. Inventory your current sessions
 
-- [ ] Open the [Element Web Sessions page](https://app.element.io/#/settings/sessions)
+- [ ] In Element Desktop, open **profile picture → All Settings → Sessions**
 - [ ] Look for the green shield on **Current Session**
 - [ ] Review **Other Sessions → Verified: Ready for secure messaging**
 - [ ] Record active devices under **Unverified: Not ready for secure messaging**
-
-If the direct link does not work, use **profile picture → All Settings → Sessions** in Element Web/Desktop.
 
 The device list on `account.matrix.org` manages login sessions; it does not reliably show cryptographic verification. Use the green shield and Verified filter in Element. A browser, Element Desktop, and Koushi on the same computer are separate Matrix devices.
 
 ### Choose the matching path
 
 1. **You have a verified device** → [2A](#2a-you-have-a-verified-device)
-2. **No verified device, but an Element Web/Desktop session can read old messages** → [2B](#2b-no-verified-device-but-old-messages-are-readable)
+2. **No verified device, but an Element Desktop session can read old messages** → [2B](#2b-no-verified-device-but-old-messages-are-readable)
 3. **No recovery key, verified device, or readable signed-in session remains** → [2C](#2c-no-recovery-path-remains)
 
 ## 2A. You have a verified device
@@ -57,9 +55,9 @@ The device list on `account.matrix.org` manages login sessions; it does not reli
 
 ## 2B. No verified device, but old messages are readable
 
-Before resetting anything, preserve the keys held by every readable Element Web/Desktop session.
+Before resetting anything, preserve the keys held by every readable Element Desktop session.
 
-- [ ] Keep all readable Element Web/Desktop sessions open
+- [ ] Keep all readable Element Desktop sessions open
 - [ ] On each one, run **Security & Privacy → Export E2E room keys**
 - [ ] Protect each export with a strong passphrase and store it safely
 - [ ] If several sessions are readable, export separately from each one
@@ -69,7 +67,7 @@ Before resetting anything, preserve the keys held by every readable Element Web/
 **Do not reset Secure Backup from Element X if you can avoid it.** Element X cannot export the complete set of room keys, so keys that are not local to that device may be lost.
 </div>
 
-Only after the exports are safe, use Element Web/Desktop to continue:
+Only after the exports are safe, use Element Desktop to continue:
 
 - [ ] Reset the cryptographic identity and Secure Backup
 - [ ] Generate and safely store a new recovery key
@@ -84,12 +82,16 @@ Only after the exports are safe, use Element Web/Desktop to continue:
 If you have no valid recovery key, verified device, or signed-in session that can read the old messages, the previous room keys cannot be recovered. A service administrator cannot decrypt them for you.
 
 - [ ] Accept that old encrypted history may be lost
-- [ ] Reset the cryptographic identity in Element Web/Desktop
+- [ ] Reset the cryptographic identity in Element Desktop
 - [ ] Generate and store a new recovery key
 - [ ] Enable Secure Backup
 - [ ] Verify every device you intend to use
 
 ## 3. Move phones to Element X
+
+This section applies to phones and supported Macs. **Element X is not available for Windows.** On Windows, keep Element Desktop as a verified reference session and protect recovery with your recovery key and Secure Backup.
+
+If an already signed-in Element Web session is the only client that can read old messages, do not clear its browser data until recovery is complete. Use Element Desktop for new setup and normal operation.
 
 - [ ] Before removing legacy Element, finish the key exports and recovery work above
 - [ ] Install [Element X](https://element.io/en/download)
@@ -113,4 +115,3 @@ If you have no valid recovery key, verified device, or signed-in session that ca
 - [How to Ensure You Have a Recovery Key](https://docs.element.io/latest/element-support/device-verification/how-to-ensure-you-have-a-recovery-key/)
 - [Resetting the server-side key backup](https://element.io/blog/resetting-the-server-side-key-backup/)
 - [Export and Import E2E Room Keys](https://docs.element.io/ess-classic-lts-24.10/element-support/cross-signing/export-and-import-e2e-room-keys/)
-
