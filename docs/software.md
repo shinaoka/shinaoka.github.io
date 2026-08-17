@@ -4,6 +4,14 @@
 
 ## Selected
 
+### Matrix communication and encryption guides
+
+* [Koushi](https://github.com/shinaoka/koushi-matrix) — an experimental Matrix client for macOS (currently dogfooding; Windows support is not yet tested)
+* **New Matrix users:** [日本語の暗号化設定チェックリスト](/blog/matrix-encryption-setup-checklist-ja/) / [English setup checklist](/blog/matrix-encryption-setup-checklist/)
+* **Existing Matrix users:** [日本語の安全確認・回復チェックリスト](/blog/matrix-encryption-safety-recovery-checklist-ja/) / [English safety and recovery checklist](/blog/matrix-encryption-safety-recovery-checklist/)
+
+The two guides cover recovery keys, Secure Backup, device verification, and recovery procedures for encrypted Matrix messages.
+
 * [DCore (integrated DMFT software for CORrelated Electrons)](https://github.com/issp-center-dev/DCore)<br>
 Easy-to-use DMFT software with text and hdf5-based interface
 * On-the-fly computation of IR basis functions
