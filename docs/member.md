@@ -3,7 +3,11 @@
 
 ### Faculty
 
-* 品岡寛 (Hiroshi SHINAOKA) Professor [shinaoka@mail.saitama-u.ac.jp](<mailto:shinaoka@mail.saitama-u.ac.jp>)
+* 品岡寛 (Hiroshi SHINAOKA)
+  * 職名: 教授 (Professor)
+  * 所属: 埼玉大学学術院 大学院理工学研究科
+  * [埼玉大学理学部物理学科 教員・研究室](https://phy.saitama-u.ac.jp/member/index.html)
+  * Email: [shinaoka@mail.saitama-u.ac.jp](<mailto:shinaoka@mail.saitama-u.ac.jp>)
 
 ### Secretary
 
