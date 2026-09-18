@@ -15,6 +15,7 @@ classes: wide
 <div class="notice--warning" markdown="1">
 **Matrix encryption guides**
 
+- Getting started: [Matrixの始め方（日本語）](/blog/matrix-nyumon-recovery-key-ja/)
 - New users: [日本語](/blog/matrix-encryption-setup-checklist-ja/) · [English](/blog/matrix-encryption-setup-checklist/)
 - Existing users and recovery: [日本語](/blog/matrix-encryption-safety-recovery-checklist-ja/) · [English](/blog/matrix-encryption-safety-recovery-checklist/)
 
