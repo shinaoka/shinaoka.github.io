@@ -81,7 +81,7 @@ MatrixのIDは`@ユーザー名:サーバー名`という形式です。たと�
 **リカバリーキーはアカウントに1つで、クライアント間で共通です。** Element、Element X、Koushiのどれで作っても同じ鍵バックアップを指します。たとえばMacのKoushiで作ったリカバリーキーを、スマートフォンのElement Xの認証にそのまま使えます。クライアントごとに別のキーを作る必要はなく、最初に使うクライアントで1回作れば十分です。
 
 - **Element（Desktop / Web）:** 初回ログイン時にSecure Backupの設定案内が出ます。閉じずに最後まで進めてください。案内が出なければ**Settings → Encryption → Get recovery key**から作れます。
-- **Element X:** 初回ログイン後の案内、または**Settings → Encryption**から作れます。
+- **Element X:** 初回ログイン後の案内、または**設定 → 暗号化**から作れます。この画面では、Secure Backupは「鍵の保管庫」、リカバリーキーは「回復鍵」と表示されます。「鍵の保管庫を使用」をオンにし、「回復鍵を設定」から作ります。すでに「回復鍵を変更」と表示されていれば設定済みです。
 - **Koushi:** ログイン直後に「Set up secure backup」というゲート画面が開きます。**Choose recovery key destination**でリカバリーキーを書き出すファイルの保存先を選び、**Create secure backup**を押し、書き出されたファイルを確認してから**I saved the recovery key**を押します。これが終わるまでチャット画面は開きません。
 
 表示または書き出されたリカバリーキーは、次のどこかに保存します。Koushiで書き出したファイルも、そのままダウンロードフォルダに置かず、次のいずれかへ移してください。
@@ -92,7 +92,7 @@ MatrixのIDは`@ユーザー名:サーバー名`という形式です。たと�
 
 チャットや自分宛てメール、暗号化されていないメモには保存しないでください。
 
-ElementのEncryption画面が**Change recovery key**になっていれば完了、**Get recovery key**のままなら未完了です。
+ElementのEncryption画面が**Change recovery key**（Element Xでは**回復鍵を変更**）になっていれば完了、**Get recovery key**（**回復鍵を設定**）のままなら未完了です。
 
 ### 4. 2台目の端末を認証する
 
