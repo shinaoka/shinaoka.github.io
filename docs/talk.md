@@ -12,5 +12,6 @@
 * [English](https://researchmap.jp/read0152172/presentations?lang=en)
 
 ## Slides
+* [NIMS Seminar: Tensor Compression for Quantum Physics: Modern Scientific Software with AI Agents (2026/10/1)](/assets/nims2026.pdf)
 * [The 13th Workshop on Quantum Many-Body Computation (2025/4/12)](/assets/QMBC2025.pdf)
 * [物性研究のための量子アルゴリズム最前線 (2023年3月28-29日)](https://qiqb.osaka-u.ac.jp/labs/ueda/fqacmp/) [[slides]](/assets/fqacmp.pdf)
