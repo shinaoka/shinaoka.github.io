@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Why Matrix? Escaping Vendor Lock-in in Research Chat"
-date: 2026-10-08
+date: 2026-10-08 06:00:00 +0900
 lang: en
 excerpt: "Slack, Zulip, Discord: research chat is split across projects, and each platform locks you into its vendor. This post explains, for newcomers, why the open Matrix protocol is an answer, why it has been slow to spread in Asia, and what changed once AI coding agents arrived."
 permalink: /blog/why-matrix/
@@ -84,7 +84,7 @@ AI coding agents such as Claude Code and Codex changed that. Official SDKs such 
 
 Indeed, a wave of new clients has appeared in 2026.
 
-- **[Koushi](https://github.com/shinaoka/koushi-matrix)**: a desktop client developed in my group. It prioritizes multilingual message search, including Japanese. It also addresses the second problem: it does not open the chat view until device verification and recovery-key backup are done.
+- **[Koushi](https://github.com/shinaoka/koushi-matrix)**: a desktop client I am building together with AI coding agents. It tackles Japanese input and search head-on, as well as the second problem, confusing security setup. See [the section below](#koushi) for details.
 - **[Komai](https://etke.cc/blog/introducing-komai)**: a desktop client from etke.cc, which states openly that it is built by engineers working together with AI coding agents (Claude Code and Codex).
 - Others include Mactrix and Relay for macOS, Lightning (Qt), and SchildiChat Revenge (see the [Matrix client list](https://matrix.org/ecosystem/clients/)).
 
@@ -109,37 +109,58 @@ Messages are encrypted on your devices, so your devices hold the decryption keys
 
 **Create and save a recovery key right after you create your account.** Keep it in a password manager, or on paper in a locked place.
 
-### An unverified device cannot read past messages
+### Always verify your own devices; you rarely need to verify other people
 
-When you log in on a new device with your password, you may see your room list but every past message shows "Unable to decrypt." Nothing is broken. That device simply has not received the keys yet.
-
-Once you **verify the new device as your own**, it can fetch keys from the key backup and read your past messages. You verify it either by entering your recovery key or by approving it from another device of yours that is already verified. It takes seconds, so do it right after logging in.
-
-Leaving a device unverified can also trigger warnings for other people in your rooms, such as "this user has an unverified device."
-
-### Verifying your own devices is not the same as verifying other people
-
-Matrix uses the word "verify" for two different things, and many people confuse them.
+Matrix uses the word "verify" for two different things, and many people confuse them. The name is the same, but the purpose and importance are completely different.
 
 ![Verifying your own devices: approve the new iPhone from your verified Mac or enter the recovery key, and the iPhone can then receive keys from the encrypted key backup on the server](/assets/images/matrix/verify-own-devices-en.svg)
 
-Verifying your own devices happens **inside your own account**. Once you accept a new device as yours, it can open the key backup.
-
 ![Verifying other people: you and a collaborator compare the emoji shown on each screen. Only needed when you must rule out impersonation; chat and encryption work without it](/assets/images/matrix/verify-other-people-en.svg)
-
-Verifying another person is a check **between your account and theirs**. It has nothing to do with handing over keys.
 
 | | Verifying your own devices | Verifying other people |
 | --- | --- | --- |
-| What it does | Confirms that a new device really belongs to you | Confirms that the person you are talking to is who they claim to be, by comparing emoji or numbers |
-| Needed? | **Required.** Without it, the device cannot get your keys | **Usually not needed** |
-| How | Enter your recovery key, or approve from another device of yours | Compare emoji with the other person in person or on a call |
+| What it does | Confirms that a new device really belongs to you | Confirms that the person you are talking to is genuine |
+| Scope | Inside your own account | Between your account and theirs |
+| Should you do it? | **Always** | **Only when security is a serious concern** |
+| How | Enter your recovery key, or approve from another device of yours | Compare the emoji on both screens, in person or on a call |
 
-Verifying other people is for situations where you need strict protection against impersonation. For everyday lab and collaboration chat, conversations and encryption work fine without it. You do not need to verify everyone. The one thing you must always do is verify your own devices.
+#### Verifying your own devices: always do it
 
-### Be careful with logging out and deleting the app
+Skipping verification of your own devices causes real, practical problems.
 
-If you have not saved a recovery key, do not log out of a logged-in device or delete the app. That device may be the last place holding keys that have not been backed up. If you get into trouble, keep the device as it is and work through the [safety and recovery checklist for existing users](/blog/matrix-encryption-safety-recovery-checklist/) from the top.
+- **Keys are not shared, so messages cannot be decrypted.** When you log in on a new device with your password, you see your room list, but every past message shows "Unable to decrypt." Nothing is broken; that device simply has not received the keys. Once it is verified, it can fetch keys from the key backup and read your messages.
+- **Other people see warnings.** When others in your rooms send messages, they are warned that you have an unverified device. Depending on their settings, that device will not receive keys for new messages either.
+
+Verification takes seconds: enter your recovery key, or approve from another device of yours that is already verified. **Whenever you log in on a new device, verify it right away.**
+
+<div class="notice--danger" markdown="1">
+**If you forget or lose your recovery key, start the recovery procedure immediately.**
+
+Before logging out of any device or deleting the app, work through the [safety and recovery checklist for existing users](/blog/matrix-encryption-safety-recovery-checklist/) from the top. A logged-in device may be the last place holding keys that have not been backed up. If you act while that device is still available, you can move to a new recovery key without losing any keys.
+</div>
+
+#### Verifying other people: only when security is a serious concern
+
+Verifying another person is how you confirm that the person you are talking to is genuine, and not someone impersonating them. You connect in person or on a call and check that both screens show the same emoji.
+
+It has nothing to do with handing over keys, so chat and encryption work normally without it. In everyday lab and collaboration chat, you would rarely do it. It is meant for situations where security matters a great deal, such as handling highly confidential information. You do not need to verify everyone.
+
+## Koushi
+
+![The Koushi window: three account tabs across the top, above a three-pane layout with Spaces, the room list, and messages](/assets/images/matrix/koushi-main.png)
+
+[Koushi](https://github.com/shinaoka/koushi-matrix) is a desktop Matrix client that I am building together with AI coding agents. The name is a Japanese pun: *kōshi* means both "photon" (光子), which carries the signal, and "lattice" (格子), a nod to Matrix. It is open source under MIT / Apache-2.0.
+
+I turned my frustrations with existing clients into design goals.
+
+- **Works properly in Japanese, Chinese, and Korean.** Confirming an IME conversion is kept separate from sending, so pressing Enter to confirm a conversion does not send a half-written message. Search works over encrypted history even for text without spaces between words, and treats full-width and half-width characters as the same. The interface is available in English and Japanese.
+- **Several accounts in one window.** If you have accounts on, say, your lab's server and on matrix.org, keep them side by side in tabs, all signed in and syncing. This takes the fragmentation problem from the start of this post and shrinks it further within Matrix.
+- **What research discussions need.** Markdown, code blocks, LaTeX-style math, and threads.
+- **Secure setup you cannot skip.** After you sign in, Koushi does not open the chat view until the device is verified and key backup is set up. Verifying other people, on the other hand, is treated as optional, and Koushi does not warn you merely because you have not done it. This is a direct implementation of the idea in the diagrams above: always verify your own devices; verify other people only when security is a serious concern.
+
+macOS (Apple Silicon) is officially supported. Releases are signed and notarized, and you can download the DMG from [Releases](https://github.com/shinaoka/koushi-matrix/releases/latest). Windows and Linux builds exist but have not been tested yet. If you use Windows or Linux and can test, report bugs, or contribute to development, you are very welcome.
+
+Voice and video calls, screen sharing, bots, and widgets are not supported yet. Since Koushi is still under development, please also keep Element X signed in to the same account. Questions and requests are welcome in the public room [#koushi-matrix:matrix.org](https://matrix.to/#/#koushi-matrix:matrix.org).
 
 ## Getting started
 
