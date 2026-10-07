@@ -1,15 +1,24 @@
 ---
 layout: single
-title: "Matrixの始め方：アカウントを作ったら、まずリカバリーキーを保存する"
+title: "【非推奨】Matrixの始め方：アカウントを作ったら、まずリカバリーキーを保存する"
 date: 2026-09-17
 lang: ja
-excerpt: "Matrixのアカウント作成からクライアントの選び方、最初に必ずやるリカバリーキーの保存、2台目の端末の認証、最初の会話までを1本にまとめました。Mac・Windows・スマートフォンのおすすめクライアントも紹介します。"
+excerpt: "この記事は非推奨です。「なぜMatrixなのか」と「暗号化設定チェックリスト」を参照してください。Matrixのアカウント作成からクライアントの選び方、最初に必ずやるリカバリーキーの保存、2台目の端末の認証、最初の会話までを1本にまとめました。Mac・Windows・スマートフォンのおすすめクライアントも紹介します。"
 permalink: /blog/matrix-nyumon-recovery-key-ja/
 toc: true
 toc_label: "目次"
 ---
 
 **言語:** 日本語
+
+<div class="notice--warning" markdown="1">
+**この記事は非推奨です（2026年10月）。** 内容は次の記事に引き継ぎました。
+
+- Matrixの考え方とつまずきやすい点：[なぜMatrixなのか](/blog/naze-matrix-ja/)
+- 使い始める手順：[Matrixを使い始める前の暗号化設定チェックリスト](/blog/matrix-encryption-setup-checklist-ja/)
+
+Koushiは現在、[GitHub Releases](https://github.com/shinaoka/koushi-matrix/releases/latest)で一般公開しています。
+</div>
 
 **対象者:** これからMatrixを使い始める人。この記事の手順を上から順に進めれば、アカウント作成から最初の会話までたどり着けます。すでに使っている人は[既存利用者向けの安全確認・回復チェックリスト](/blog/matrix-encryption-safety-recovery-checklist-ja/)へ。
 
