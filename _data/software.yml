@@ -1,0 +1,91 @@
+# Configuration for the Software page (docs/software.md).
+#
+# script/update_software_stats.py reads this file every day (GitHub Actions),
+# collects public repositories from `orgs` plus the extra `repos`, and writes
+# _data/software_stats.json. Do not edit the JSON by hand.
+#
+# New public repositories in the listed organizations appear automatically
+# under "Other repositories". Move them into a category below, or exclude them.
+
+orgs:
+  - SpM-lab
+  - tensor4all
+
+# Repositories outside the organizations above.
+repos:
+  - issp-center-dev/DCore
+  - ALPSCore/CT-HYB
+  - shinaoka/koushi-matrix
+
+# fnmatch patterns on the repository name (case-insensitive).
+exclude:
+  - .github
+  - "*.github.io"
+  - "*benchmark*"
+  - "*-test"
+  - "*-docker"
+  - "*-binder"
+  - "*-doc"
+  - "*_deprecated*"
+  - "template-*"
+  - "*-agent-rules"
+  - "*-meta"
+  - community
+  - JuliaDesign
+  - JuliaUmbrella
+  - T4ARegistry
+  - MSSTA_example
+  - ir_kotaibutsuri
+
+categories:
+  - title: Intermediate representation (IR) of Green's functions
+    repos:
+      - SpM-lab/sparse-ir
+      - SpM-lab/SparseIR.jl
+      - SpM-lab/sparse-ir-rs
+      - SpM-lab/sparse-ir-fortran
+      - SpM-lab/sparse-ir-tutorial
+    links:
+      - title: Tutorial
+        url: https://spm-lab.github.io/sparse-ir-tutorial/
+      - title: Software paper (open access)
+        url: https://www.sciencedirect.com/science/article/pii/S2352711022001844
+
+  - title: Analytic continuation
+    repos:
+      - SpM-lab/SpM
+      - SpM-lab/pySpMAC
+      - SpM-lab/Nevanlinna.jl
+    links:
+      - title: SpM paper
+        url: https://www.sciencedirect.com/science/article/abs/pii/S0010465519302103
+      - title: arXiv:1904.02903
+        url: https://arxiv.org/abs/1904.02903
+
+  - title: Tensor cross interpolation and quantics tensor trains
+    repos:
+      - tensor4all/TensorCrossInterpolation.jl
+      - tensor4all/xfac
+      - tensor4all/QuanticsTCI.jl
+      - tensor4all/Quantics.jl
+      - tensor4all/QuanticsGrids.jl
+      - tensor4all/TreeTCI.jl
+      - tensor4all/TCIAlgorithms.jl
+
+  - title: Tensor networks and autodiff in Rust
+    repos:
+      - tensor4all/tensor4all-rs
+      - tensor4all/tenferro-rs
+      - tensor4all/Tensor4all.jl
+
+  - title: DMFT and quantum impurity solvers
+    repos:
+      - issp-center-dev/DCore
+      - ALPSCore/CT-HYB
+    links:
+      - title: CT-HYB paper
+        url: https://doi.org/10.1016/j.cpc.2017.01.003
+
+  - title: Tools
+    repos:
+      - shinaoka/koushi-matrix
