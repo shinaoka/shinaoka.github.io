@@ -12,6 +12,7 @@
 * [English](https://researchmap.jp/read0152172/presentations?lang=en)
 
 ## Slides
+* [Sophia Symposium 2026: Rebuilding Computational Physics in Rust with AI Agents (2026/11/7)](/assets/sophia2026.pdf)
 * [NIMS Seminar: Tensor Compression for Quantum Physics: Modern Scientific Software with AI Agents (2026/10/1)](/assets/nims2026.pdf)
 * [The 13th Workshop on Quantum Many-Body Computation (2025/4/12)](/assets/QMBC2025.pdf)
 * [物性研究のための量子アルゴリズム最前線 (2023年3月28-29日)](https://qiqb.osaka-u.ac.jp/labs/ueda/fqacmp/) [[slides]](/assets/fqacmp.pdf)
