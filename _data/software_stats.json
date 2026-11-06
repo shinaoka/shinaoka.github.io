@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05 01:08 UTC",
+  "generated_at": "2026-11-06 01:14 UTC",
   "activity_days": 90,
   "categories": [
     {
@@ -55,7 +55,7 @@
           "open_issues": 18,
           "open_prs": 2,
           "last_commit": "2026-11-02",
-          "commits_recent": 187,
+          "commits_recent": 181,
           "release": "",
           "release_date": "",
           "release_url": ""
@@ -274,10 +274,10 @@
           "homepage": "https://tensor4all.org/tensor4all-rs/",
           "language": "Rust",
           "stars": 31,
-          "open_issues": 26,
+          "open_issues": 25,
           "open_prs": 1,
           "last_commit": "2026-11-05",
-          "commits_recent": 395,
+          "commits_recent": 398,
           "release": "",
           "release_date": "",
           "release_url": ""
@@ -289,10 +289,10 @@
           "homepage": "http://tensor4all.org/tenferro-rs/",
           "language": "Rust",
           "stars": 84,
-          "open_issues": 36,
+          "open_issues": 38,
           "open_prs": 0,
           "last_commit": "2026-11-05",
-          "commits_recent": 1184,
+          "commits_recent": 1173,
           "release": "v0.9.0",
           "release_date": "2026-11-02",
           "release_url": "https://github.com/tensor4all/tenferro-rs/releases/tag/v0.9.0"
@@ -366,13 +366,13 @@
           "homepage": "https://shinaoka.github.io/koushi-matrix/",
           "language": "Rust",
           "stars": 9,
-          "open_issues": 22,
+          "open_issues": 18,
           "open_prs": 1,
           "last_commit": "2026-11-05",
-          "commits_recent": 2828,
-          "release": "v0.33.0",
-          "release_date": "2026-11-04",
-          "release_url": "https://github.com/shinaoka/koushi-matrix/releases/tag/v0.33.0"
+          "commits_recent": 2825,
+          "release": "v0.33.1",
+          "release_date": "2026-11-05",
+          "release_url": "https://github.com/shinaoka/koushi-matrix/releases/tag/v0.33.1"
         }
       ]
     },
@@ -492,10 +492,10 @@
           "homepage": "",
           "language": "Rust",
           "stars": 2,
-          "open_issues": 8,
+          "open_issues": 9,
           "open_prs": 0,
-          "last_commit": "2026-11-03",
-          "commits_recent": 568,
+          "last_commit": "2026-11-05",
+          "commits_recent": 555,
           "release": "",
           "release_date": "",
           "release_url": ""
@@ -567,10 +567,10 @@
           "homepage": "http://tensor4all.org/strided-rs/",
           "language": "Rust",
           "stars": 1,
-          "open_issues": 24,
+          "open_issues": 25,
           "open_prs": 0,
-          "last_commit": "2026-11-03",
-          "commits_recent": 165,
+          "last_commit": "2026-11-05",
+          "commits_recent": 166,
           "release": "strided-exec-v0.7.1",
           "release_date": "2026-10-25",
           "release_url": "https://github.com/tensor4all/strided-rs/releases/tag/strided-exec-v0.7.1"
@@ -597,10 +597,10 @@
           "homepage": "",
           "language": "Rust",
           "stars": 1,
-          "open_issues": 8,
+          "open_issues": 11,
           "open_prs": 0,
-          "last_commit": "2026-11-03",
-          "commits_recent": 29,
+          "last_commit": "2026-11-06",
+          "commits_recent": 36,
           "release": "",
           "release_date": "",
           "release_url": ""
@@ -629,8 +629,8 @@
           "stars": 1,
           "open_issues": 5,
           "open_prs": 0,
-          "last_commit": "2026-11-03",
-          "commits_recent": 179,
+          "last_commit": "2026-11-05",
+          "commits_recent": 180,
           "release": "",
           "release_date": "",
           "release_url": ""
@@ -734,8 +734,8 @@
           "stars": 0,
           "open_issues": 6,
           "open_prs": 0,
-          "last_commit": "2026-11-03",
-          "commits_recent": 92,
+          "last_commit": "2026-11-05",
+          "commits_recent": 93,
           "release": "",
           "release_date": "",
           "release_url": ""
